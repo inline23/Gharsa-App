@@ -19,7 +19,10 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Latest Analysis', style: Theme.of(context).textTheme.headlineSmall),
+                Text(
+                  'Latest Analysis',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
                 // Date could go here
                 Text('Today', style: Theme.of(context).textTheme.bodyMedium),
               ],
@@ -51,16 +54,25 @@ class HomeScreen extends StatelessWidget {
                           color: AppColors.primaryGreen.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Icon(Icons.science, color: AppColors.primaryGreen),
+                        child: const Icon(
+                          Icons.science,
+                          color: AppColors.primaryGreen,
+                        ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Soil Analysis', style: Theme.of(context).textTheme.titleLarge),
+                            Text(
+                              'Soil Analysis',
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
                             const SizedBox(height: 4),
-                            Text('Ongoing', style: Theme.of(context).textTheme.bodyMedium),
+                            Text(
+                              'Ongoing',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
                           ],
                         ),
                       ),
@@ -74,7 +86,9 @@ class HomeScreen extends StatelessWidget {
                       value: 0.7,
                       minHeight: 8,
                       backgroundColor: Color(0xFFE0E0E0),
-                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryGreen),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppColors.primaryGreen,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -91,18 +105,33 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 24),
 
             // Categories
-            _buildCategoryCard(context, 'Water Analysis', Icons.water_drop, AppColors.secondaryBlue),
+            // _buildCategoryCard(context, 'Water Analysis', Icons.water_drop, AppColors.secondaryBlue),
+            // const SizedBox(height: 16),
+            _buildCategoryCard(
+              context,
+              'Soil Analysis',
+              Icons.eco,
+              AppColors.secondaryBrown,
+            ),
             const SizedBox(height: 16),
-            _buildCategoryCard(context, 'Soil Analysis', Icons.eco, AppColors.primaryGreen),
-            const SizedBox(height: 16),
-            _buildCategoryCard(context, 'Crop Recommendation', Icons.spa, AppColors.secondaryBrown),
+            _buildCategoryCard(
+              context,
+              'Crop Recommendation',
+              Icons.spa,
+              AppColors.primaryGreen,
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildCategoryCard(BuildContext context, String title, IconData icon, Color color) {
+  Widget _buildCategoryCard(
+    BuildContext context,
+    String title,
+    IconData icon,
+    Color color,
+  ) {
     return Container(
       height: 80,
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -131,10 +160,16 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(color: color),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(color: color),
             ),
           ),
-          const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.textSecondary),
+          const Icon(
+            Icons.arrow_forward_ios,
+            size: 16,
+            color: AppColors.textSecondary,
+          ),
         ],
       ),
     );

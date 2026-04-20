@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gharsa_app/ui/auth/otp_screen.dart';
 import 'core/routes/app_routes.dart';
 import 'core/theme/app_theme.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Gharsa MVP',
       theme: AppTheme.lightTheme,
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.login,
       onGenerateRoute: AppRoutes.generateRoute,
       debugShowCheckedModeBanner: false,
     );
