@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gharsa_app/core/theme/app_colors.dart';
 import 'package:gharsa_app/services/api_service.dart';
-import 'package:gharsa_app/ui/auth/new_password_screen.dart';
+import 'package:gharsa_app/features/auth/presentation/new_password_screen.dart';
 
 class ResetOtpScreen extends StatefulWidget {
   const ResetOtpScreen({super.key, required this.email});

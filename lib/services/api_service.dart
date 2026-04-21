@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'package:gharsa_app/models/user_model.dart';
+import 'package:gharsa_app/features/auth/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
   static const String baseUrl = "https://gharsa.semiona.com";
 
   // ================= LOGIN =================
-  static Future<UserModel?> login({
+  Future<UserModel?> login({
     required String email,
     required String password,
   }) async {
@@ -65,15 +65,12 @@ class ApiService {
     }
   }
 
-  static Future<bool> verifyOtp({
-    required String email,
-    required String otp,
-  }) async {
+  Future<bool> verifyOtp({required String email, required String otp}) async {
     try {
       final response = await http.post(
         Uri.parse('https://gharsa.semiona.com/api/auth/verify-otp'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({"email": email, "otp": otp}),
+        body: jsonEncode({"email": email, "otp_code": otp}),
       );
 
       final data = jsonDecode(response.body);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gharsa_app/ui/auth/forgot_password_screen.dart';
+import 'package:gharsa_app/features/auth/presentation/forgot_password_screen.dart';
 
-import '../../ui/main/main_screen.dart';
-import '../../ui/auth/login_screen.dart';
-import '../../ui/auth/signup_screen.dart';
+import '../../features/main/main_screen.dart';
+import '../../features/auth/presentation/login_screen.dart';
+import '../../features/auth/presentation/signup_screen.dart';
 
 class AppRoutes {
   static const String home = '/home';

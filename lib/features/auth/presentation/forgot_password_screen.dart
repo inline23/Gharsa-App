@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gharsa_app/core/theme/app_colors.dart';
 import 'package:gharsa_app/core/widgets/custom_text_field.dart';
 import 'package:gharsa_app/services/api_service.dart';
-import 'package:gharsa_app/ui/auth/reset_otp_screen.dart';
+import 'package:gharsa_app/features/auth/presentation/reset_otp_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
