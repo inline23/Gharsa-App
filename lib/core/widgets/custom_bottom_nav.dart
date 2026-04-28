@@ -13,42 +13,62 @@ class CustomBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final icons = [Icons.home, Icons.history, Icons.person];
+    final items = [
+      {"icon": Icons.home, "label": "Home"},
+      {"icon": Icons.history, "label": "History"},
+      {"icon": Icons.person, "label": "Profile"},
+    ];
 
     return Container(
       margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primaryGreen.withOpacity(0.3),
-            blurRadius: 6,
-            offset: const Offset(0, 8),
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
           ),
         ],
-        color: Colors.white.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(icons.length, (index) {
+        children: List.generate(items.length, (index) {
           final isSelected = currentIndex == index;
 
           return GestureDetector(
             onTap: () => onTap(index),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 250),
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
                 color: isSelected
-                    ? Colors.white.withOpacity(0.15)
+                    ? AppColors.primaryGreen.withOpacity(0.12)
                     : Colors.transparent,
-                shape: BoxShape.circle,
+                borderRadius: BorderRadius.circular(20),
               ),
-              child: Icon(
-                icons[index],
-                color: isSelected ? Colors.white : Colors.grey,
-                size: 26,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    items[index]["icon"] as IconData,
+                    size: isSelected ? 28 : 24,
+                    color: isSelected ? AppColors.primaryGreen : Colors.grey,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    items[index]["label"] as String,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: isSelected ? AppColors.primaryGreen : Colors.grey,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.w400,
+                    ),
+                  ),
+                ],
               ),
             ),
           );

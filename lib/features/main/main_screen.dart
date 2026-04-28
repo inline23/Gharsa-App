@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:gharsa_app/core/widgets/custom_bottom_nav.dart';
 import 'package:gharsa_app/features/auth/api/api_service.dart';
@@ -7,7 +6,7 @@ import 'package:gharsa_app/features/history/api/history_service.dart';
 import 'package:gharsa_app/features/history/presentaion/cubit/history_cubit.dart';
 import 'package:gharsa_app/features/history/presentaion/history_screen.dart';
 import 'package:gharsa_app/features/home/presentation/home_screen.dart';
-import 'package:gharsa_app/features/home/presentation/profile_screen.dart';
+import 'package:gharsa_app/features/profile/presentaion/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -39,7 +38,7 @@ class _MainScreenState extends State<MainScreen> {
 
     /// 👇 Cubit is reused properly here
     HistoryScreen(),
-    const ProfileScreen(),
+    ProfileScreen(),
   ];
 
   @override

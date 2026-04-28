@@ -17,3 +17,9 @@ class HistoryError extends HistoryState {
 
   HistoryError(this.message);
 }
+
+class HistoryLastLoaded extends HistoryState {
+  final HistoryItem? lastItem;
+
+  HistoryLastLoaded(this.lastItem);
+}

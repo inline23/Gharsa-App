@@ -175,7 +175,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
           const SizedBox(height: 12),
 
-          // CROPS
+          // 🌱 CROPS (FIXED - NOT BUTTON LOOK)
           if (crops.isNotEmpty)
             Wrap(
               spacing: 8,
@@ -187,41 +187,33 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
           const SizedBox(height: 14),
 
-          // 👇 VIEW DETAILS BUTTON (NEW DESIGN)
+          // VIEW DETAILS
           _viewDetailsButton(item),
         ],
       ),
     );
   }
 
-  // 🌱 CROP BADGE
+  // 🌱 FIXED CROP BADGE (NON-CLICKABLE LOOK)
   Widget _cropBadge(String text) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: Colors.green.withOpacity(0.08),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.green.withOpacity(0.25)),
+        color: Colors.green.withOpacity(0.06),
+        borderRadius: BorderRadius.circular(12),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.eco, size: 14, color: Colors.green),
-          const SizedBox(width: 4),
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: Colors.green,
-            ),
-          ),
-        ],
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w500,
+          color: Colors.green,
+        ),
       ),
     );
   }
 
-  // 🔥 VIEW DETAILS BUTTON (CONTAINER STYLE)
+  // 🔥 VIEW DETAILS BUTTON (UNCHANGED - GOOD)
   Widget _viewDetailsButton(HistoryItem item) {
     return GestureDetector(
       onTap: () {

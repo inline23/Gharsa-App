@@ -65,4 +65,17 @@ class HistoryCubit extends Cubit<HistoryState> {
 
     return "Something went wrong";
   }
+
+
+
+HistoryItem? getLastHistoryItem() {
+  if (state is HistorySuccess) {
+    final list = (state as HistorySuccess).history;
+    if (list.isNotEmpty) {
+      return list.first; // أو last حسب API order
+    }
+  }
+  return null;
+}
+
 }

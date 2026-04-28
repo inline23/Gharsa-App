@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gharsa_app/features/auth/presentation/forgot_password_screen.dart';
-import 'package:gharsa_app/features/home/presentation/profile_screen.dart';
+import 'package:gharsa_app/features/profile/presentaion/profile_screen.dart';
 import 'package:gharsa_app/features/soil%20anaylsis/presentation/soil_analysis_form.dart';
 
 import '../../features/main/main_screen.dart';
