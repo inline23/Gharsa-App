@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../core/theme/app_colors.dart';
+import 'package:gharsa_app/core/routes/app_routes.dart';
+import '../../../core/theme/app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -102,16 +103,23 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
+
             const SizedBox(height: 24),
 
             // Categories
             // _buildCategoryCard(context, 'Water Analysis', Icons.water_drop, AppColors.secondaryBlue),
             // const SizedBox(height: 16),
-            _buildCategoryCard(
-              context,
-              'Soil Analysis',
-              Icons.eco,
-              AppColors.secondaryBrown,
+            GestureDetector(
+              onTap: () {
+               Navigator.pushNamed(context, AppRoutes.soilAnalysis);
+              },
+
+              child: _buildCategoryCard(
+                context,
+                'Soil Analysis',
+                Icons.eco,
+                AppColors.secondaryBrown,
+              ),
             ),
             const SizedBox(height: 16),
             _buildCategoryCard(

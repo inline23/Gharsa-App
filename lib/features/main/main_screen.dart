@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
-import '../home/home_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:gharsa_app/core/widgets/custom_bottom_nav.dart';
+import 'package:gharsa_app/features/auth/api/api_service.dart';
+import 'package:gharsa_app/features/history/api/history_service.dart';
+import 'package:gharsa_app/features/history/presentaion/cubit/history_cubit.dart';
+import 'package:gharsa_app/features/history/presentaion/history_screen.dart';
+import 'package:gharsa_app/features/home/presentation/home_screen.dart';
+import 'package:gharsa_app/features/home/presentation/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -9,49 +17,42 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
+  int currentIndex = 0;
 
-  final List<Widget> _pages = [
-    const HomeScreen(),
-    const Center(child: Text('History Page')),
-    const Center(child: Text('Notifications Page')),
-    const Center(child: Text('Profile Page')),
-  ];
+  late final HistoryCubit historyCubit;
 
-  void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+  @override
+  void initState() {
+    super.initState();
+
+    historyCubit = HistoryCubit(HistoryService(ApiService()));
   }
+
+  @override
+  void dispose() {
+    historyCubit.close();
+    super.dispose();
+  }
+
+  late final screens = [
+    const HomeScreen(),
+
+    /// 👇 Cubit is reused properly here
+    HistoryScreen(),
+    const ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTabTapped,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_outlined),
-            activeIcon: Icon(Icons.notifications),
-            label: 'Notifications',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
+      body: IndexedStack(index: currentIndex, children: screens),
+      bottomNavigationBar: CustomBottomNav(
+        currentIndex: currentIndex,
+        onTap: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
       ),
     );
   }

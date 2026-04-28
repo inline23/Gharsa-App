@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:gharsa_app/features/auth/data/models/user_model.dart';
 import 'package:gharsa_app/features/auth/data/repository/auth_repo.dart';
 import 'package:gharsa_app/features/auth/presentation/cubit/auth_state.dart';
 
@@ -52,14 +51,60 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> verifyOtp(String email, String otp) async {
-  emit(AuthLoading());
+    emit(AuthLoading());
 
-  final success = await repo.verifyOtp(email, otp);
+    final success = await repo.verifyOtp(email, otp);
 
-  if (success) {
-    emit(OtpVerified());
-  } else {
-    emit(AuthError("Invalid OTP"));
+    if (success) {
+      emit(OtpVerified());
+    } else {
+      emit(AuthError("Invalid OTP"));
+    }
   }
-}
+
+  Future<void> forgotPassword(String email) async {
+    emit(AuthLoading());
+
+    final success = await repo.forgotPassword(email);
+
+    if (success) {
+      emit(ForgotPasswordSuccess(email));
+    } else {
+      emit(AuthError("Failed to send reset email"));
+    }
+  }
+
+  Future<void> verifyResetOtp(String email, String otp) async {
+    emit(AuthLoading());
+
+    final success = await repo.verifyResetOtp(email, otp);
+
+    if (success) {
+      emit(VerifyResetOtpSuccess(email, otp));
+    } else {
+      emit(AuthError("Invalid OTP"));
+    }
+  }
+
+  Future<void> resetPasswordWithOtp({
+    required String email,
+    required String otp,
+    required String newPassword,
+    required String confirmPassword,
+  }) async {
+    emit(AuthLoading());
+
+    final success = await repo.resetPassword(
+      email: email,
+      otp: otp,
+      newPassword: newPassword,
+      confirmPassword: confirmPassword,
+    );
+
+    if (success) {
+      emit(ResetPasswordSuccess(email));
+    } else {
+      emit(AuthError("Failed to reset password"));
+    }
+  }
 }

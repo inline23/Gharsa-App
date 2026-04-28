@@ -1,5 +1,5 @@
 import 'package:gharsa_app/features/auth/data/models/user_model.dart';
-import 'package:gharsa_app/services/api_service.dart';
+import 'package:gharsa_app/features/auth/api/api_service.dart';
 class AuthRepo {
   final ApiService apiService;
 
@@ -22,7 +22,7 @@ class AuthRepo {
     required String password,
     required String confirmPassword,
   }){
-    return ApiService.register(
+    return apiService.register(
       name: name,
       email: email,
       phone: phone,
@@ -34,6 +34,28 @@ class AuthRepo {
   Future<bool> verifyOtp(String email, String otp) {
     
     return apiService.verifyOtp(email : email, otp : otp);
+  }
+
+  Future<bool> forgotPassword(String email) {
+    return apiService.resetPassword(email: email);
+  }
+
+  Future<bool> verifyResetOtp(String email, String otp) {
+    return apiService.verifyResetOtp(email: email, otp: otp);
+  }
+
+  Future<bool> resetPassword({
+    required String email,
+    required String otp,
+    required String newPassword,
+    required String confirmPassword,
+  }) {
+    return apiService.resetPasswordWithOtp(
+      email: email,
+      otp: otp,
+      password: newPassword,
+      confirmPassword: confirmPassword,
+    );
   }
 
   

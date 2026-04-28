@@ -1,9 +1,38 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'package:gharsa_app/features/auth/data/models/user_model.dart';
+import 'package:gharsa_app/features/soil%20anaylsis/data/models/soil_analysis_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
   static const String baseUrl = "https://gharsa.semiona.com";
+
+  // ================= TOKEN =================
+  Future<void> saveToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("token", token);
+  }
+
+  Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString("token");
+  }
+
+  Future<Map<String, String>> getHeaders() async {
+    final token = await getToken();
+
+    return {
+      'Content-Type': 'application/json',
+      if (token != null && token.isNotEmpty) 'Authorization': 'Bearer $token',
+    };
+  }
+
+  Future<String?> printToken() async {
+    final token = await getToken();
+    return token;
+  }
 
   // ================= LOGIN =================
   Future<UserModel?> login({
@@ -20,6 +49,7 @@ class ApiService {
       final data = jsonDecode(response.body);
 
       if (response.statusCode == 200 && data['success'] == true) {
+        await saveToken(data['data']['token'].toString());
         return UserModel.fromJson(data['data']);
       } else {
         print(data['message']);
@@ -31,7 +61,7 @@ class ApiService {
     }
   }
 
-  static Future<bool> register({
+  Future<bool> register({
     required String name,
     required String email,
     required String phone,
@@ -87,7 +117,7 @@ class ApiService {
     }
   }
 
-  static Future<bool> resetPassword({required String email}) async {
+  Future<bool> resetPassword({required String email}) async {
     try {
       final response = await http.post(
         Uri.parse('https://gharsa.semiona.com/api/auth/forgot-password'),
@@ -109,7 +139,7 @@ class ApiService {
     }
   }
 
-  static Future<bool> verifyResetOtp({
+  Future<bool> verifyResetOtp({
     required String email,
     required String otp,
   }) async {
@@ -134,7 +164,7 @@ class ApiService {
     }
   }
 
-  static Future<bool> resetPasswordWithOtp({
+  Future<bool> resetPasswordWithOtp({
     required String email,
     required String otp,
     required String password,
@@ -166,37 +196,61 @@ class ApiService {
     }
   }
 
+  // ================= LOGOUT =================
+  Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove("token");
+  }
+
   // ================= PREDICT =================
-  static Future<Map<String, dynamic>?> predict({
-    required int N,
-    required int P,
-    required int K,
-    required double temperature,
-    required double humidity,
+  Future<SoilAnalysisModel?> predict({
+    required double ec,
+    required double sar,
+    required double caco3,
+    required double gypsum,
+    required double om,
+    required double n,
+    required double p,
+    required double k,
+    required double fe,
+    required double mn,
+    required double zn,
+    required double cu,
+    required int eDepth,
     required double ph,
-    required double rainfall,
+    required String texture,
   }) async {
     try {
+      final headers = await getHeaders();
       final response = await http.post(
-        Uri.parse('$baseUrl/predict'),
-        headers: {'Content-Type': 'application/json'},
+        Uri.parse('$baseUrl/api/soil/predict?include_expert_report=1'),
+        headers: headers,
         body: jsonEncode({
-          "N": N,
-          "P": P,
-          "K": K,
-          "temperature": temperature,
-          "humidity": humidity,
+          "ec": ec,
+          "sar": sar,
+          "caco3": caco3,
+          "gypsum": gypsum,
+          "om": om,
+          "n": n,
+          "p": p,
+          "k": k,
+          "fe": fe,
+          "mn": mn,
+          "zn": zn,
+          "cu": cu,
+          "e_depth": eDepth,
           "ph": ph,
-          "rainfall": rainfall,
+          "texture": texture,
         }),
       );
-
-      print("Status Code: ${response.statusCode}");
-      print("Response: ${response.body}");
-
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+        final json = jsonDecode(response.body);
+        return SoilAnalysisModel.fromJson(json);
+      } else if (response.statusCode == 401) {
+        print("Unauthorized ❌ → لازم Login تاني");
+        return null;
       } else {
+        print(response.body);
         return null;
       }
     } catch (e) {
