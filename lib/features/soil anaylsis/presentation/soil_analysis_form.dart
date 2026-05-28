@@ -20,16 +20,34 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
   final TextEditingController caco3 = TextEditingController();
   final TextEditingController gypsum = TextEditingController();
   final TextEditingController om = TextEditingController();
+
   final TextEditingController n = TextEditingController();
   final TextEditingController p = TextEditingController();
   final TextEditingController k = TextEditingController();
+
   final TextEditingController fe = TextEditingController();
   final TextEditingController mn = TextEditingController();
   final TextEditingController zn = TextEditingController();
   final TextEditingController cu = TextEditingController();
-  final TextEditingController e_depth = TextEditingController();
+
+  final TextEditingController eDepth = TextEditingController();
   final TextEditingController ph = TextEditingController();
-  final TextEditingController texture = TextEditingController();
+
+  String? selectedTexture;
+
+  final List<String> textures = [
+    'Clay',
+    'Clay Loam',
+    'Loam',
+    'Loamy Sand',
+    'Sand',
+    'Sandy Clay',
+    'Sandy Clay Loam',
+    'Sandy Loam',
+    'Silty Clay',
+    'Silty Clay Loam',
+    'Silty Loam',
+  ];
 
   @override
   void dispose() {
@@ -45,9 +63,8 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
     mn.dispose();
     zn.dispose();
     cu.dispose();
-    e_depth.dispose();
+    eDepth.dispose();
     ph.dispose();
-    texture.dispose();
     super.dispose();
   }
 
@@ -64,248 +81,174 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
             ),
           );
         }
-        if (state is SoilAnalysisError) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('Error: ${state.message}')));
+        if (state is SoilAnalysisLoading) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Analyzing soil...",
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: AppColors.secondaryBrown,
+            ),
+          );
         }
       },
-
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: Colors.white,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: const IconThemeData(color: Colors.black87),
+          ),
+          backgroundColor: const Color(0xffF6F7F9),
           body: SafeArea(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24.0,
-                vertical: 16.0,
-              ),
+              padding: const EdgeInsets.all(20),
               child: Form(
                 key: _formKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Custom AppBar / Header
-                    Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.background,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.arrow_back_ios_new,
-                              color: Colors.black,
-                              size: 20,
-                            ),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                        ),
-                        const Expanded(
-                          child: Text(
-                            'Soil Analysis',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 48,
-                        ), // Balance for centering title
-                      ],
-                    ),
-
-                    const SizedBox(height: 32),
-
+                    /// ================= HEADER =================
                     const Text(
-                      'Enter Soil Data',
+                      "🌱 Soil Intelligence Analysis",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.secondaryBrown,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 6),
                     const Text(
-                      'Provide the metrics below for an accurate analysis and tailored recommendations.',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.textSecondary,
-                        height: 1.5,
-                      ),
+                      "Enter soil parameters for AI-powered agricultural insights",
+                      style: TextStyle(color: Colors.black54),
                     ),
 
-                    const SizedBox(height: 32),
-                    _buildInputSection(
-                      '(EC)',
-                      'e.g., 1.5 dS/m',
-                      ec,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(SAR)',
-                      'e.g., 10',
-                      sar,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(CaCO3)',
-                      'e.g., 5%',
-                      caco3,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(Gypsum)',
-                      'e.g., 2%',
-                      gypsum,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(OM)',
-                      'e.g., 3%',
-                      om,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(N)',
-                      'e.g., 0.2%',
-                      n,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(P)',
-                      'e.g., 15 ppm',
-                      p,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(K)',
-                      'e.g., 200 ppm',
-                      k,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(Fe)',
-                      'e.g., 50 ppm',
-                      fe,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(Mn)',
-                      'e.g., 20 ppm',
-                      mn,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(Zn)',
-                      'e.g., 10 ppm',
-                      zn,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(Cu)',
-                      'e.g., 5 ppm',
-                      cu,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(Effective Depth)',
-                      'e.g., 30 cm',
-                      e_depth,
-                      TextInputType.number,
-                      (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "This field is required";
-                        }
-
-                        if (int.tryParse(value) == null) {
-                          return "Enter a valid number";
-                        }
-
-                        return null;
-                      },
-                    ),
-                    _buildInputSection(
-                      '(pH)',
-                      'e.g., 6.5',
-                      ph,
-                      TextInputType.number,
-                      _validateNumber,
-                    ),
-                    _buildInputSection(
-                      '(Texture)',
-                      'e.g., Loamy',
-                      texture,
-                      TextInputType.text,
-                      (value) {
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 32),
-
-                    ElevatedButton(
-                      onPressed: () {
-                        if (!_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Please fill all fields correctly"),
-                            ),
-                          );
-                          return;
-                        }
-
-                        context.read<SoilAnalysisCubit>().predictSoilQuality(
-                          ec: double.parse(ec.text.trim()),
-                          sar: double.parse(sar.text.trim()),
-                          caco3: double.parse(caco3.text),
-                          gypsum: double.parse(gypsum.text),
-                          om: double.parse(om.text),
-                          n: double.parse(n.text),
-                          p: double.parse(p.text),
-                          k: double.parse(k.text),
-                          fe: double.parse(fe.text),
-                          mn: double.parse(mn.text),
-                          zn: double.parse(zn.text),
-                          cu: double.parse(cu.text),
-                          eDepth: int.parse(e_depth.text),
-                          ph: double.parse(ph.text),
-                          texture: texture.text.trim(),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.secondaryBrown,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        elevation: 0,
-                      ),
-                      child: const Text(
-                        'Analyze Soil',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
                     const SizedBox(height: 24),
+
+                    /// ================= SECTION 1 =================
+                    _buildSectionTitle("Soil Chemistry"),
+                    _card([
+                      _field("EC", ec),
+                      _field("SAR", sar),
+                      _field("CaCO3", caco3),
+                      _field("Gypsum", gypsum),
+                      _field("Organic Matter (OM)", om),
+                    ]),
+
+                    /// ================= SECTION 2 =================
+                    _buildSectionTitle("Macro Nutrients"),
+                    _card([
+                      _field("Nitrogen (N)", n),
+                      _field("Phosphorus (P)", p),
+                      _field("Potassium (K)", k),
+                    ]),
+
+                    /// ================= SECTION 3 =================
+                    _buildSectionTitle("Micro Nutrients"),
+                    _card([
+                      _field("Iron (Fe)", fe),
+                      _field("Manganese (Mn)", mn),
+                      _field("Zinc (Zn)", zn),
+                      _field("Copper (Cu)", cu),
+                    ]),
+
+                    /// ================= SECTION 4 =================
+                    _buildSectionTitle("Physical Properties"),
+                    _card([
+                      _field("Effective Depth", eDepth),
+                      _field("pH", ph),
+                    ]),
+
+                    const SizedBox(height: 16),
+
+                    /// ================= TEXTURE =================
+                    _buildSectionTitle("Soil Texture"),
+
+                    const SizedBox(height: 10),
+
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: textures.map((t) {
+                        final isSelected = selectedTexture == t;
+
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedTexture = t;
+                            });
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? AppColors.secondaryBrown
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: isSelected
+                                    ? AppColors.secondaryBrown
+                                    : Colors.grey.shade300,
+                              ),
+                            ),
+                            child: Text(
+                              t,
+                              style: TextStyle(
+                                color: isSelected
+                                    ? Colors.white
+                                    : Colors.black87,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    /// ================= CTA =================
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.secondaryBrown,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (!_formKey.currentState!.validate()) return;
+
+                          context.read<SoilAnalysisCubit>().predictSoilQuality(
+                            ec: double.parse(ec.text),
+                            sar: double.parse(sar.text),
+                            caco3: double.parse(caco3.text),
+                            gypsum: double.parse(gypsum.text),
+                            om: double.parse(om.text),
+                            n: double.parse(n.text),
+                            p: double.parse(p.text),
+                            k: double.parse(k.text),
+                            fe: double.parse(fe.text),
+                            mn: double.parse(mn.text),
+                            zn: double.parse(zn.text),
+                            cu: double.parse(cu.text),
+                            eDepth: int.parse(eDepth.text),
+                            ph: double.parse(ph.text),
+                            texture: selectedTexture ?? "",
+                          );
+                        },
+                        child: const Text(
+                          "Analyze Soil",
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -316,47 +259,43 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
     );
   }
 
-  Widget _buildInputSection(
-    String label,
-    String hint,
-    TextEditingController controller,
-    TextInputType? keyboardType,
-    String? Function(String?)? validator,
-  ) {
+  Widget _buildSectionTitle(String title) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: AppColors.secondaryBrown,
-            ),
-          ),
-          const SizedBox(height: 8),
-          CustomTextField(
-            hintText: hint,
-            controller: controller,
-            keyboardType: keyboardType ?? TextInputType.text,
-            validator: validator,
-          ),
-        ],
+      padding: const EdgeInsets.only(top: 18, bottom: 10),
+      child: Text(
+        title,
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
     );
   }
 
-  String? _validateNumber(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return "This field is required";
-    }
+  Widget _card(List<Widget> children) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(children: children),
+    );
+  }
 
-    if (double.tryParse(value) == null) {
-      return "Enter a valid number";
-    }
-
-    return null;
+  Widget _field(String label, TextEditingController c) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: CustomTextField(
+        controller: c,
+        hintText: label,
+        keyboardType: TextInputType.number,
+      ),
+    );
   }
 }

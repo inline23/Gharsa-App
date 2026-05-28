@@ -49,6 +49,21 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthError(e.toString()));
     }
   }
+Future<void> resendOtp(String email) async {
+  emit(ResendOtpLoading());
+
+  try {
+    final success = await repo.resendOtp(email);
+
+    if (success) {
+      emit(OtpResent(email));
+    } else {
+      emit(AuthError("Failed to resend OTP"));
+    }
+  } catch (e) {
+    emit(AuthError(e.toString()));
+  }
+}
 
   Future<void> verifyOtp(String email, String otp) async {
     emit(AuthLoading());

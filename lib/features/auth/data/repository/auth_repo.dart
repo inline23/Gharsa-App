@@ -31,6 +31,10 @@ class AuthRepo {
     );
   }
 
+  Future<bool> resendOtp(String email) {
+    return apiService.resendOtp(email);
+  }
+
   Future<bool> verifyOtp(String email, String otp) {
     
     return apiService.verifyOtp(email : email, otp : otp);

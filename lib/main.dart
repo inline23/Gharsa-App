@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gharsa_app/features/auth/data/repository/auth_repo.dart';
 import 'package:gharsa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:gharsa_app/features/auth/api/api_service.dart';
+import 'package:gharsa_app/features/chatbot/api/chat_bot_api_service.dart';
+import 'package:gharsa_app/features/chatbot/presentation/chat_screen.dart';
+import 'package:gharsa_app/features/chatbot/presentation/cubit/chat_cubit.dart';
 import 'package:gharsa_app/features/history/api/history_service.dart';
 import 'package:gharsa_app/features/history/presentaion/cubit/history_cubit.dart';
 import 'package:gharsa_app/features/profile/data/service/profile_service.dart';
@@ -24,6 +27,10 @@ void main() {
         ),
         BlocProvider(create: (_) => HistoryCubit(HistoryService(ApiService()))),
         BlocProvider(create: (_) => ProfileCubit(ProfileService(ApiService()))),
+         BlocProvider(
+      create: (_) =>
+          ChatCubit(ChatBotApiService(ApiService()))..createSession(),
+    ),
       ],
       child: MyApp(),
     ),

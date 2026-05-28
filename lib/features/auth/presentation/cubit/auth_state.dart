@@ -22,6 +22,13 @@ class VerifyResetOtpSuccess extends AuthState {
   VerifyResetOtpSuccess(this.email , this.otp);
 }
 
+class OtpResent extends AuthState {
+  final String email;
+  OtpResent(this.email);
+}
+
+class ResendOtpLoading extends AuthState {}
+
 class ResetPasswordSuccess extends AuthState {
   final String email;
   ResetPasswordSuccess(this.email);

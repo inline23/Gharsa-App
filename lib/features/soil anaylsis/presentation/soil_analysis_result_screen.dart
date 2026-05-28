@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gharsa_app/core/theme/app_colors.dart';
 import 'package:gharsa_app/features/soil anaylsis/data/models/soil_analysis_model.dart';
 import 'package:gharsa_app/features/soil anaylsis/presentation/crop_recommendation_screen.dart';
+import 'package:readmore/readmore.dart';
 
 class SoilAnalysisResultScreen extends StatelessWidget {
-  const SoilAnalysisResultScreen({
-    super.key,
-    required this.soilAnalysisModel,
-  });
+  const SoilAnalysisResultScreen({super.key, required this.soilAnalysisModel});
 
   final SoilAnalysisModel soilAnalysisModel;
 
@@ -33,10 +31,7 @@ class SoilAnalysisResultScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24.0,
-            vertical: 32.0,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -59,6 +54,7 @@ class SoilAnalysisResultScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
+                    /// TITLE
                     const Text(
                       'Soil Classification',
                       style: TextStyle(
@@ -95,80 +91,80 @@ class SoilAnalysisResultScreen extends StatelessWidget {
                       data?.nameEn ?? "Unknown Soil",
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                         color: Colors.white,
                         height: 1.4,
                       ),
                     ),
 
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 36),
 
-                    /// RECOMMENDATIONS TITLE
-                    const Text(
-                      "Recommendations",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                    /// ================== EXPERT REPORT ==================
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Expert Soil Report",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
 
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 18),
 
-                    /// RECOMMENDATIONS LIST
-                    if ((data?.recommendations ?? []).isEmpty)
-                      const Text(
-                        "No recommendations available",
-                        style: TextStyle(color: Colors.white70),
-                      )
-                    else
-                      ...List.generate(
-                        data!.recommendations!.length,
-                        (index) {
-                          final rec = data.recommendations![index];
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "• ",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    rec.en ?? '',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      height: 1.4,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
+                    /// REPORT TEXT
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(18),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.12),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.15),
+                        ),
                       ),
+                      child: ReadMoreText(
+                        data?.expertReportEn?.replaceAll(r'\n', '\n\n') ??
+                            'No report available',
+                        trimLines: 6,
+                        trimMode: TrimMode.Line,
+                        trimCollapsedText: ' Read More',
+                        trimExpandedText: ' Show Less',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          height: 1.8,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        moreStyle: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                        lessStyle: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
 
               const SizedBox(height: 30),
 
-              /// ================== BUTTON ==================
+              /// ================== CROP RECOMMENDATION BUTTON ==================
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => CropRecommendationScreen(
-                        cropRecommendations:
-                            data?.cropRecommendations ?? [],
+                        cropRecommendations: data?.cropRecommendations ?? [],
                       ),
                     ),
                   );
@@ -183,18 +179,16 @@ class SoilAnalysisResultScreen extends StatelessWidget {
                 ),
                 child: const Text(
                   'Crop Recommendation',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
 
               const SizedBox(height: 12),
 
-              /// ================== EXIT ==================
+              /// ================== EXIT BUTTON ==================
               OutlinedButton(
                 onPressed: () {
+                  Navigator.pop(context);
                   Navigator.pop(context);
                 },
                 style: OutlinedButton.styleFrom(
@@ -210,10 +204,7 @@ class SoilAnalysisResultScreen extends StatelessWidget {
                 ),
                 child: const Text(
                   'Exit',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
