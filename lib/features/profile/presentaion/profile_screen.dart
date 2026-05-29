@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gharsa_app/features/profile/presentaion/cubit/profile_cubit.dart';
 import 'package:gharsa_app/features/profile/presentaion/cubit/profile_state.dart';
+import 'package:gharsa_app/features/profile/presentaion/settings_page.dart';
 import '../../../core/theme/app_colors.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -31,6 +32,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: const Color(0xFFF7F8FA),
 
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SettingsPage()),
+              );
+            },
+            icon: const Icon(Icons.settings),
+          ),
+        ],
         title: const Text("Profile"),
         centerTitle: true,
         backgroundColor: Colors.transparent,

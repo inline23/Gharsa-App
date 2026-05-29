@@ -1,0 +1,8 @@
+{
+  "appName": "Gharsa",
+  "login": "Login",
+  "email": "Email",
+  "password": "Password",
+  "confirm": "Confirm",
+  "resendEmail": "Resend Email"
+}

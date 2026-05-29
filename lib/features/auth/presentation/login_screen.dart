@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gharsa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:gharsa_app/features/auth/presentation/cubit/auth_state.dart';
+import 'package:gharsa_app/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/widgets/custom_text_field.dart';
@@ -131,8 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     child: isLoading
                         ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
-                            'LOG IN',
+                        : Text(
+                            AppLocalizations.of(context)!.login,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
