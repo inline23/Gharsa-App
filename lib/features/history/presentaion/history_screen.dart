@@ -4,6 +4,7 @@ import 'package:gharsa_app/features/history/data/models/history_model.dart';
 import 'package:gharsa_app/features/history/presentaion/cubit/history_cubit.dart';
 import 'package:gharsa_app/features/history/presentaion/cubit/history_state.dart';
 import 'package:gharsa_app/features/history/presentaion/view_details_page.dart';
+import 'package:gharsa_app/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -26,8 +27,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
       backgroundColor: const Color(0xFFF7F8FA),
 
       appBar: AppBar(
-        title: const Text(
-          "History",
+        title: Text(
+          AppLocalizations.of(context)!.history,
           style: TextStyle(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.bold,
@@ -230,14 +231,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
           borderRadius: BorderRadius.circular(14),
           border: Border.all(color: Colors.green.withOpacity(0.3)),
         ),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.visibility, size: 18, color: Colors.green),
-            SizedBox(width: 6),
+            const Icon(Icons.visibility, size: 18, color: Colors.green),
+            const SizedBox(width: 6),
             Text(
-              "View Details",
-              style: TextStyle(
+              AppLocalizations.of(
+                context,
+              )!.viewDetails, // EXTRA SPACES FOR BETTER CENTERING
+              style: const TextStyle(
                 color: Colors.green,
                 fontWeight: FontWeight.w600,
               ),

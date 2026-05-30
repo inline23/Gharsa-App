@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gharsa_app/core/theme/app_colors.dart';
+import 'package:gharsa_app/l10n/app_localizations.dart';
 
 class CustomBottomNav extends StatelessWidget {
   final int currentIndex;
@@ -14,9 +15,9 @@ class CustomBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = [
-      {"icon": Icons.home, "label": "Home"},
-      {"icon": Icons.history, "label": "History"},
-      {"icon": Icons.person, "label": "Profile"},
+      {"icon": Icons.home, "label":   AppLocalizations.of(context)!.home},
+      {"icon": Icons.history, "label": AppLocalizations.of(context)!.history},
+      {"icon": Icons.person, "label": AppLocalizations.of(context)!.profile},
     ];
 
     return Container(

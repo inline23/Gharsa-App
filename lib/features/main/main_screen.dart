@@ -38,8 +38,6 @@ class _MainScreenState extends State<MainScreen> {
 
   late final screens = [
     const HomeScreen(),
-
-    /// 👇 Cubit is reused properly here
     HistoryScreen(),
     ProfileScreen(),
   ];

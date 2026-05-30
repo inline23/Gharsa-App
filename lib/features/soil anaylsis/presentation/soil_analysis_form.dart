@@ -4,6 +4,8 @@ import 'package:gharsa_app/features/soil%20anaylsis/presentation/cubit/soil_anal
 import 'package:gharsa_app/features/soil%20anaylsis/presentation/soil_analysis_result_screen.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_text_field.dart';
+import 'package:gharsa_app/l10n/app_localizations.dart';
+
 
 class SoilAnalysisForm extends StatefulWidget {
   const SoilAnalysisForm({super.key});
@@ -110,23 +112,23 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     /// ================= HEADER =================
-                    const Text(
-                      "🌱 Soil Intelligence Analysis",
+                    Text(
+                      AppLocalizations.of(context)!.soilIntelligenceAnalysis,
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 6),
-                    const Text(
-                      "Enter soil parameters for AI-powered agricultural insights",
+                    Text(
+                      AppLocalizations.of(context)!.enterSoilParameters,
                       style: TextStyle(color: Colors.black54),
                     ),
 
                     const SizedBox(height: 24),
 
                     /// ================= SECTION 1 =================
-                    _buildSectionTitle("Soil Chemistry"),
+                    _buildSectionTitle(AppLocalizations.of(context)!.soilChemistry),
                     _card([
                       _field("EC", ec),
                       _field("SAR", sar),
@@ -136,27 +138,27 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
                     ]),
 
                     /// ================= SECTION 2 =================
-                    _buildSectionTitle("Macro Nutrients"),
+                    _buildSectionTitle(AppLocalizations.of(context)!.macroNutrients),
                     _card([
-                      _field("Nitrogen (N)", n),
-                      _field("Phosphorus (P)", p),
-                      _field("Potassium (K)", k),
+                      _field(AppLocalizations.of(context)!.nitrogen, n),
+                      _field(AppLocalizations.of(context)!.phosphorus, p),
+                      _field(AppLocalizations.of(context)!.potassium, k),
                     ]),
 
                     /// ================= SECTION 3 =================
-                    _buildSectionTitle("Micro Nutrients"),
+                    _buildSectionTitle(AppLocalizations.of(context)!.microNutrients),
                     _card([
-                      _field("Iron (Fe)", fe),
-                      _field("Manganese (Mn)", mn),
-                      _field("Zinc (Zn)", zn),
-                      _field("Copper (Cu)", cu),
+                      _field(AppLocalizations.of(context)!.iron, fe),
+                      _field(AppLocalizations.of(context)!.manganese, mn),
+                      _field(AppLocalizations.of(context)!.zinc, zn),
+                      _field(AppLocalizations.of(context)!.copper, cu),
                     ]),
 
                     /// ================= SECTION 4 =================
-                    _buildSectionTitle("Physical Properties"),
+                    _buildSectionTitle(AppLocalizations.of(context)!.physicalProperties),
                     _card([
-                      _field("Effective Depth", eDepth),
-                      _field("pH", ph),
+                      _field(AppLocalizations.of(context)!.effectiveDepth, eDepth),
+                      _field(AppLocalizations.of(context)!.ph, ph),
                     ]),
 
                     const SizedBox(height: 16),

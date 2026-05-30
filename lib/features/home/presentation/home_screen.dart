@@ -5,6 +5,7 @@ import 'package:gharsa_app/features/history/data/models/history_model.dart';
 import 'package:gharsa_app/features/history/presentaion/cubit/history_cubit.dart';
 import 'package:gharsa_app/features/history/presentaion/cubit/history_state.dart';
 import 'package:gharsa_app/features/history/presentaion/view_details_page.dart';
+import 'package:gharsa_app/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gharsa', style: Theme.of(context).textTheme.displayLarge),
+        title: Text(AppLocalizations.of(context)!.appName, style: Theme.of(context).textTheme.displayLarge),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -42,7 +43,7 @@ class HomeScreen extends StatelessWidget {
 
             _category(
               context,
-              title: 'Soil Analysis',
+              title: AppLocalizations.of(context)!.soilAnalysis,
               img: Image.asset('assets/images/soil.png', width: 27),
               color: AppColors.secondaryBrown,
               onTap: () {
@@ -69,7 +70,7 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Latest Analysis',
+               AppLocalizations.of(context)!.latestAnalysis,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Text(
@@ -132,7 +133,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          res?.nameEn ?? "Soil Analysis",
+                         AppLocalizations.of(context)!.soilAnalysis,
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 4),
@@ -185,7 +186,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text('View Details'),
+                  child: Text(AppLocalizations.of(context)!.viewDetails),
                 ),
               ),
             ],
@@ -195,7 +196,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // ❌ EMPTY STATE
   Widget _emptyCard() {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -207,7 +207,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // 📦 CATEGORY
+  // category
   Widget _category(
     BuildContext context, {
     required String title,
@@ -261,7 +261,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // 🧠 DATE FORMATTER
+  //  DATE FORMATTER
   String _formatDate(String date) {
     try {
       final parsed = DateTime.parse(date);
