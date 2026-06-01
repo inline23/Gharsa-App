@@ -35,6 +35,38 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
   final TextEditingController eDepth = TextEditingController();
   final TextEditingController ph = TextEditingController();
 
+
+String getTextureName(BuildContext context, String texture) {
+  final l10n = AppLocalizations.of(context)!;
+
+  switch (texture) {
+    case 'Clay':
+      return l10n.clay;
+    case 'Clay Loam':
+      return l10n.clayLoam;
+    case 'Loam':
+      return l10n.loam;
+    case 'Loamy Sand':
+      return l10n.loamySand;
+    case 'Sand':
+      return l10n.sand;
+    case 'Sandy Clay':
+      return l10n.sandyClay;
+    case 'Sandy Clay Loam':
+      return l10n.sandyClayLoam;
+    case 'Sandy Loam':
+      return l10n.sandyLoam;
+    case 'Silty Clay':
+      return l10n.siltyClay;
+    case 'Silty Clay Loam':
+      return l10n.siltyClayLoam;
+    case 'Silty Loam':
+      return l10n.siltyLoam;
+    default:
+      return texture;
+  }
+}
+
   String? selectedTexture;
 
   final List<String> textures = [
@@ -85,9 +117,9 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
         }
         if (state is SoilAnalysisLoading) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(
-                "Analyzing soil...",
+                AppLocalizations.of(context)!.analyzingSoil,
                 style: TextStyle(color: Colors.white),
               ),
               backgroundColor: AppColors.secondaryBrown,
@@ -130,11 +162,11 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
                     /// ================= SECTION 1 =================
                     _buildSectionTitle(AppLocalizations.of(context)!.soilChemistry),
                     _card([
-                      _field("EC", ec),
-                      _field("SAR", sar),
-                      _field("CaCO3", caco3),
-                      _field("Gypsum", gypsum),
-                      _field("Organic Matter (OM)", om),
+                     _field(AppLocalizations.of(context)!.ec, ec),
+                      _field(AppLocalizations.of(context)!.sar, sar),
+                      _field(AppLocalizations.of(context)!.caco3, caco3),
+                      _field(AppLocalizations.of(context)!.gypsum, gypsum),
+                      _field(AppLocalizations.of(context)!.organicMatter, om),
                     ]),
 
                     /// ================= SECTION 2 =================
@@ -164,7 +196,7 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
                     const SizedBox(height: 16),
 
                     /// ================= TEXTURE =================
-                    _buildSectionTitle("Soil Texture"),
+                    _buildSectionTitle(AppLocalizations.of(context)!.soilTexture),
 
                     const SizedBox(height: 10),
 
@@ -198,7 +230,7 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
                               ),
                             ),
                             child: Text(
-                              t,
+                              getTextureName(context, t),
                               style: TextStyle(
                                 color: isSelected
                                     ? Colors.white
@@ -245,8 +277,8 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
                             texture: selectedTexture ?? "",
                           );
                         },
-                        child: const Text(
-                          "Analyze Soil",
+                        child:  Text(
+                          AppLocalizations.of(context)!.analyzeSoil,
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ),

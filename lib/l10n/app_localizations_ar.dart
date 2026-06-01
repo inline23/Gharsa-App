@@ -78,7 +78,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get na => 'غير محدد';
 
   @override
-  String get soilIntelligenceAnalysis => 'تحليل التربه الذكي';
+  String get soilIntelligenceAnalysis => 'تحليل ذكاء التربة';
 
   @override
   String get enterSoilParameters =>
@@ -258,4 +258,13 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get riceSupport =>
       'مستويات عالية من البوتاسيوم ودرجة حموضة (pH) مناسبة تدعم نمو الأرز';
+
+  @override
+  String get analyzingSoil => 'جاري تحليل التربة...';
+
+  @override
+  String get requiredField => 'هذا الحقل مطلوب';
+
+  @override
+  String get enterValidNumber => 'أدخل رقمًا صحيحًا';
 }

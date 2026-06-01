@@ -259,4 +259,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get riceSupport =>
       'High potassium levels and suitable pH support rice growth';
+
+  @override
+  String get analyzingSoil => 'Analyzing soil...';
+
+  @override
+  String get requiredField => 'This field is required';
+
+  @override
+  String get enterValidNumber => 'Enter a valid number';
 }

@@ -91,5 +91,9 @@
   "wheat": "Wheat",
   "sugarcaneSupport": "High organic matter and suitable pH support sugarcane growth",
   "maizeSupport": "Moderate nitrogen and phosphorus levels support maize growth",
-  "riceSupport": "High potassium levels and suitable pH support rice growth"
+  "riceSupport": "High potassium levels and suitable pH support rice growth",
+  "analyzingSoil": "Analyzing soil...",
+  "requiredField": "This field is required",
+  "enterValidNumber": "Enter a valid number"
+
 }

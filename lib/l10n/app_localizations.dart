@@ -589,6 +589,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'High potassium levels and suitable pH support rice growth'**
   String get riceSupport;
+
+  /// No description provided for @analyzingSoil.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyzing soil...'**
+  String get analyzingSoil;
+
+  /// No description provided for @requiredField.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get requiredField;
+
+  /// No description provided for @enterValidNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid number'**
+  String get enterValidNumber;
 }
 
 class _AppLocalizationsDelegate
