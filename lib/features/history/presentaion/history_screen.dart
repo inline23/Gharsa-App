@@ -54,7 +54,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
             final list = state.history;
 
             if (list.isEmpty) {
-              return const Center(child: Text("No history yet 🌱"));
+              return Center(
+                child: Text(AppLocalizations.of(context)!.noHistoryYet),
+              );
             }
 
             return RefreshIndicator(
@@ -92,7 +94,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             onPressed: () {
               context.read<HistoryCubit>().loadHistory();
             },
-            child: const Text("Retry"),
+            child: Text(AppLocalizations.of(context)!.retry),
           ),
         ],
       ),
@@ -103,7 +105,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget _historyCard(HistoryItem item) {
     final res = item.responsePayload;
 
-    final name = res?.nameEn ?? "Unknown";
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+
+    final name =
+        (isArabic ? res?.nameAr : res?.nameEn) ??
+        AppLocalizations.of(context)!.unknown;
     final level = res?.level ?? "Unknown";
     final color = _hexToColor(res?.color ?? "#999999");
     final date = _formatDate(item.createdAt ?? "");
@@ -182,7 +188,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
               spacing: 8,
               runSpacing: 6,
               children: crops.take(3).map((crop) {
-                return _cropBadge(crop.cropEn ?? "");
+                return _cropBadge(
+                  isArabic ? (crop.cropAr ?? "") : (crop.cropEn ?? ""),
+                );
               }).toList(),
             ),
 

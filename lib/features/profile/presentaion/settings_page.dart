@@ -81,9 +81,9 @@ class SettingsPage extends StatelessWidget {
                 ],
               ),
               child: ListTile(
-                leading:  Icon(Icons.language, color: Colors.green),
-                title:  Text(AppLocalizations.of(context)!.languages),
-                subtitle:  Text(AppLocalizations.of(context)!.changeAppLanguage),
+                leading: Icon(Icons.language, color: Colors.green),
+                title: Text(AppLocalizations.of(context)!.languages),
+                subtitle: Text(AppLocalizations.of(context)!.changeAppLanguage),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () => _showLanguageDialog(context),
               ),

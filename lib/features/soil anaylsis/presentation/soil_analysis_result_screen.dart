@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gharsa_app/core/theme/app_colors.dart';
 import 'package:gharsa_app/features/soil anaylsis/data/models/soil_analysis_model.dart';
 import 'package:gharsa_app/features/soil anaylsis/presentation/crop_recommendation_screen.dart';
+import 'package:gharsa_app/l10n/app_localizations.dart';
 import 'package:readmore/readmore.dart';
 
 class SoilAnalysisResultScreen extends StatelessWidget {
@@ -13,11 +14,14 @@ class SoilAnalysisResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = soilAnalysisModel.data;
 
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text(
-          'Soil Analysis Result',
+        // ================== APP BAR ==================
+        title: Text(
+          AppLocalizations.of(context)!.soilAnalysisResult,
           style: TextStyle(
             color: AppColors.textPrimary,
             fontSize: 20,
@@ -55,8 +59,8 @@ class SoilAnalysisResultScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     /// TITLE
-                    const Text(
-                      'Soil Classification',
+                    Text(
+                      AppLocalizations.of(context)!.soilClassification,
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -88,7 +92,8 @@ class SoilAnalysisResultScreen extends StatelessWidget {
 
                     /// SOIL NAME
                     Text(
-                      data?.nameEn ?? "Unknown Soil",
+                      (isArabic ? data?.nameAr : data?.nameEn) ??
+                          AppLocalizations.of(context)!.unknownSoil,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 20,
@@ -101,10 +106,10 @@ class SoilAnalysisResultScreen extends StatelessWidget {
                     const SizedBox(height: 36),
 
                     /// ================== EXPERT REPORT ==================
-                    const Align(
+                    Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        "Expert Soil Report",
+                        AppLocalizations.of(context)!.expertSoilReport,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22,
@@ -127,12 +132,16 @@ class SoilAnalysisResultScreen extends StatelessWidget {
                         ),
                       ),
                       child: ReadMoreText(
-                        data?.expertReportEn?.replaceAll(r'\n', '\n\n') ??
-                            'No report available',
+                        (isArabic ? data?.expertReportAr : data?.expertReportEn)
+                                ?.replaceAll(r'\n', '\n\n') ??
+                            AppLocalizations.of(context)!.noReportAvailable,
                         trimLines: 6,
                         trimMode: TrimMode.Line,
-                        trimCollapsedText: ' Read More',
-                        trimExpandedText: ' Show Less',
+                        trimCollapsedText:
+                            ' ${AppLocalizations.of(context)!.readMore}',
+
+                        trimExpandedText:
+                            ' ${AppLocalizations.of(context)!.showLess}',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -177,8 +186,8 @@ class SoilAnalysisResultScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: const Text(
-                  'Crop Recommendation',
+                child: Text(
+                  AppLocalizations.of(context)!.cropRecommendation,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -202,8 +211,8 @@ class SoilAnalysisResultScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: const Text(
-                  'Exit',
+                child: Text(
+                  AppLocalizations.of(context)!.exit,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gharsa_app/core/theme/app_colors.dart';
-import 'package:gharsa_app/features/soil anaylsis/data/models/crop_recommendation.dart';
+import 'package:gharsa_app/features/soil%20anaylsis/data/models/crop_recommendation.dart';
+import 'package:gharsa_app/l10n/app_localizations.dart';
 
 class CropRecommendationScreen extends StatelessWidget {
   const CropRecommendationScreen({
@@ -12,12 +13,16 @@ class CropRecommendationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final isArabic =
+        Localizations.localeOf(context).languageCode == 'ar';
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text(
-          'Crop Recommendations',
-          style: TextStyle(
+        title: Text(
+          l10n.cropRecommendations,
+          style: const TextStyle(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.bold,
           ),
@@ -28,10 +33,10 @@ class CropRecommendationScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: AppColors.textPrimary),
       ),
       body: cropRecommendations.isEmpty
-          ? const Center(
+          ? Center(
               child: Text(
-                "No recommendations available 🌾",
-                style: TextStyle(fontSize: 16),
+                l10n.noRecommendationsAvailable,
+                style: const TextStyle(fontSize: 16),
               ),
             )
           : ListView.builder(
@@ -41,10 +46,32 @@ class CropRecommendationScreen extends StatelessWidget {
                 final rec = cropRecommendations[index];
 
                 return _cropCard(
-                  cropName: rec.cropEn ?? "Unknown",
-                  season: rec.seasonEn ?? "Unknown",
+                  context: context,
+                  cropName: isArabic
+                      ? (rec.cropAr ??
+                            rec.cropEn ??
+                            l10n.unknownCrop)
+                      : (rec.cropEn ??
+                            rec.cropAr ??
+                            l10n.unknownCrop),
+
+                  season: isArabic
+                      ? (rec.seasonAr ??
+                            rec.seasonEn ??
+                            l10n.unknownSeason)
+                      : (rec.seasonEn ??
+                            rec.seasonAr ??
+                            l10n.unknownSeason),
+
                   suitability: rec.suitability ?? 0,
-                  reason: rec.reasonEn ?? "",
+
+                  reason: isArabic
+                      ? (rec.reasonAr ??
+                            rec.reasonEn ??
+                            "")
+                      : (rec.reasonEn ??
+                            rec.reasonAr ??
+                            ""),
                 );
               },
             ),
@@ -52,13 +79,19 @@ class CropRecommendationScreen extends StatelessWidget {
   }
 
   Widget _cropCard({
+    required BuildContext context,
     required String cropName,
     required String season,
     required int suitability,
     required String reason,
   }) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 8,
+      ),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -74,7 +107,7 @@ class CropRecommendationScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// ================= HEADER =================
+          /// HEADER
           Row(
             children: [
               Container(
@@ -88,6 +121,7 @@ class CropRecommendationScreen extends StatelessWidget {
                   color: Colors.green,
                 ),
               ),
+
               const SizedBox(width: 12),
 
               Expanded(
@@ -100,7 +134,6 @@ class CropRecommendationScreen extends StatelessWidget {
                 ),
               ),
 
-              /// suitability %
               Text(
                 "$suitability%",
                 style: const TextStyle(
@@ -113,18 +146,25 @@ class CropRecommendationScreen extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          /// ================= SEASON =================
+          /// SEASON
           Row(
             children: [
-              const Icon(Icons.calendar_month, size: 18),
+              const Icon(
+                Icons.calendar_month,
+                size: 18,
+              ),
+
               const SizedBox(width: 6),
-              Text("Season: $season"),
+
+              Text(
+                "${l10n.seasonLabel}: $season",
+              ),
             ],
           ),
 
           const SizedBox(height: 12),
 
-          /// ================= PROGRESS =================
+          /// PROGRESS
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: LinearProgressIndicator(
@@ -139,7 +179,7 @@ class CropRecommendationScreen extends StatelessWidget {
 
           const SizedBox(height: 14),
 
-          /// ================= REASON =================
+          /// REASON
           Text(
             reason,
             style: const TextStyle(
@@ -153,7 +193,6 @@ class CropRecommendationScreen extends StatelessWidget {
     );
   }
 
-  /// ================= COLOR LOGIC =================
   Color _getSuitabilityColor(int value) {
     if (value >= 80) return Colors.green;
     if (value >= 50) return Colors.orange;

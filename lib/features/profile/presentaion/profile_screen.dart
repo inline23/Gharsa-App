@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gharsa_app/features/profile/presentaion/cubit/profile_cubit.dart';
 import 'package:gharsa_app/features/profile/presentaion/cubit/profile_state.dart';
 import 'package:gharsa_app/features/profile/presentaion/settings_page.dart';
+import 'package:gharsa_app/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -43,7 +44,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             icon: const Icon(Icons.settings),
           ),
         ],
-        title: const Text("Profile"),
+       title: Text(
+  AppLocalizations.of(context)!.profile,
+),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -99,8 +102,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 15),
 
                     Text(
-                      user.name ?? "Unknown User",
-                      style: const TextStyle(
+                   user.name ??
+    AppLocalizations.of(context)!.unknownUser,
+                      style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -115,16 +119,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     const SizedBox(height: 25),
 
-                    _infoCard(Icons.phone, "Phone", user.phoneNumber ?? "N/A"),
-                    _infoCard(Icons.location_city, "City", user.city ?? "N/A"),
+                    _infoCard(Icons.phone, AppLocalizations.of(context)!.phone, user.phoneNumber ?? AppLocalizations.of(context)!.notAvailable),
+                    _infoCard(Icons.location_city, AppLocalizations.of(context)!.city, user.city ?? AppLocalizations.of(context)!.notAvailable),
                     _infoCard(
                       Icons.verified,
-                      "Verified",
-                      user.isVerified == true ? "Yes" : "No",
+                      AppLocalizations.of(context)!.verified,
+                      user.isVerified == true ? AppLocalizations.of(context)!.yes : AppLocalizations.of(context)!.no,
                     ),
                     _infoCard(
                       Icons.calendar_today,
-                      "Joined",
+                      AppLocalizations.of(context)!.joined,
                       _formatDate(user.createdAt ?? ""),
                     ),
 
@@ -135,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: ElevatedButton.icon(
                         onPressed: () {},
                         icon: const Icon(Icons.edit),
-                        label: const Text("Edit Profile"),
+                        label: Text(AppLocalizations.of(context)!.editProfile),
                       ),
                     ),
                   ],
@@ -164,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onPressed: () {
               context.read<ProfileCubit>().getProfile();
             },
-            child: const Text("Retry"),
+            child: Text(AppLocalizations.of(context)!.retry),
           ),
         ],
       ),

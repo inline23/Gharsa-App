@@ -193,10 +193,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get soilColor => 'Soil Color';
 
   @override
-  String get nameEn => 'Name EN';
+  String get nameEn => 'Soil Name';
 
   @override
   String get recommendedCrops => 'Recommended Crops';
+
+  @override
+  String get soilAnalysisResult => 'Soil Analysis Result';
 
   @override
   String get soilClassification => 'Soil Classification';
@@ -286,4 +289,82 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languages => 'Languages';
+
+  @override
+  String get unknownSoil => 'Unknown Soil';
+
+  @override
+  String get noReportAvailable => 'No report available';
+
+  @override
+  String get showLess => 'Show Less';
+
+  @override
+  String get noHistoryYet => 'No history yet 🌱';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get unknownUser => 'Unknown User';
+
+  @override
+  String get notAvailable => 'N/A';
+
+  @override
+  String get phone => 'Phone';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get crop => 'Crop';
+
+  @override
+  String get level => 'Level';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get error => 'An error occurred';
+
+  @override
+  String get success => 'Success';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get soilAnalysisDetails => 'Analysis Details';
+
+  @override
+  String get unknownLevel => 'Unknown Level';
+
+  @override
+  String get noCropRecommendations => 'No crop recommendations available';
+
+  @override
+  String get unknownCrop => 'Unknown Crop';
+
+  @override
+  String get seasonLabel => 'Season';
+
+  @override
+  String get cropRecommendations => 'Crop Recommendations';
+
+  @override
+  String get noRecommendationsAvailable => 'No recommendations available 🌾';
+
+  @override
+  String get unknownSeason => 'Unknown Season';
 }

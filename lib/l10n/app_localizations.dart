@@ -467,7 +467,7 @@ abstract class AppLocalizations {
   /// No description provided for @nameEn.
   ///
   /// In en, this message translates to:
-  /// **'Name EN'**
+  /// **'Soil Name'**
   String get nameEn;
 
   /// No description provided for @recommendedCrops.
@@ -475,6 +475,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recommended Crops'**
   String get recommendedCrops;
+
+  /// No description provided for @soilAnalysisResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil Analysis Result'**
+  String get soilAnalysisResult;
 
   /// No description provided for @soilClassification.
   ///
@@ -643,6 +649,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Languages'**
   String get languages;
+
+  /// No description provided for @unknownSoil.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Soil'**
+  String get unknownSoil;
+
+  /// No description provided for @noReportAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No report available'**
+  String get noReportAvailable;
+
+  /// No description provided for @showLess.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Less'**
+  String get showLess;
+
+  /// No description provided for @noHistoryYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No history yet 🌱'**
+  String get noHistoryYet;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknown;
+
+  /// No description provided for @unknownUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown User'**
+  String get unknownUser;
+
+  /// No description provided for @notAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'N/A'**
+  String get notAvailable;
+
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phone;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @crop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get crop;
+
+  /// No description provided for @level.
+  ///
+  /// In en, this message translates to:
+  /// **'Level'**
+  String get level;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred'**
+  String get error;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get success;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @soilAnalysisDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis Details'**
+  String get soilAnalysisDetails;
+
+  /// No description provided for @unknownLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Level'**
+  String get unknownLevel;
+
+  /// No description provided for @noCropRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'No crop recommendations available'**
+  String get noCropRecommendations;
+
+  /// No description provided for @unknownCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Crop'**
+  String get unknownCrop;
+
+  /// No description provided for @seasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Season'**
+  String get seasonLabel;
+
+  /// No description provided for @cropRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop Recommendations'**
+  String get cropRecommendations;
+
+  /// No description provided for @noRecommendationsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No recommendations available 🌾'**
+  String get noRecommendationsAvailable;
+
+  /// No description provided for @unknownSeason.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Season'**
+  String get unknownSeason;
 }
 
 class _AppLocalizationsDelegate

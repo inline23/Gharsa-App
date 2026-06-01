@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gharsa_app/features/history/data/models/history_model.dart';
 import 'package:gharsa_app/features/soil%20anaylsis/data/models/crop_recommendation.dart';
+import 'package:gharsa_app/l10n/app_localizations.dart';
 
 class ViewDetailsPage extends StatelessWidget {
   final HistoryItem history;
@@ -19,22 +20,25 @@ class ViewDetailsPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(color: Colors.black),
-        title: const Text(
-          "Analysis Details",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        title: Text(
+          AppLocalizations.of(context)!.soilAnalysisDetails,
+          style: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
 
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // 🌿 HEADER CARD
-          _buildHeaderCard(res),
+          //  HEADER CARD
+          _buildHeaderCard(context, res),
 
           const SizedBox(height: 16),
 
-          // 🌱 INPUT SECTION
-          _sectionTitle("Soil Input"),
+          //  INPUT SECTION
+          _sectionTitle(AppLocalizations.of(context)!.soilInput),
 
           _buildGrid([
             _miniCard("N", req?.n),
@@ -47,32 +51,45 @@ class ViewDetailsPage extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          // 🌾 RESULT SECTION
-          _sectionTitle("Result"),
+          //  RESULT SECTION
+          _sectionTitle(AppLocalizations.of(context)!.result),
+          _buildInfoCard(
+            context,
+            AppLocalizations.of(context)!.soilLevel,
+            res?.level,
+          ),
 
-          _buildInfoCard("Soil Level", res?.level),
-          _buildInfoCard("Soil Color", res?.color),
-          _buildInfoCard("Name EN", res?.nameEn),
+          _buildInfoCard(
+            context,
+            AppLocalizations.of(context)!.soilColor,
+            res?.color,
+          ),
+
+          _buildInfoCard(
+            context,
+            AppLocalizations.of(context)!.nameEn,
+            res?.nameEn,
+          ),
 
           const SizedBox(height: 20),
 
-          // 🌱 CROPS SECTION
-          _sectionTitle("Recommended Crops"),
+          //  CROPS SECTION
+          _sectionTitle(AppLocalizations.of(context)!.recommendedCrops),
 
           if (crops.isNotEmpty)
-            ...crops.map((c) => _buildCropCard(c))
+            ...crops.map((c) => _buildCropCard(context, c))
           else
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(12),
-              child: Text("No crop recommendations available"),
+              child: Text(AppLocalizations.of(context)!.noCropRecommendations),
             ),
         ],
       ),
     );
   }
 
-  // 🧠 HEADER
-  Widget _buildHeaderCard(res) {
+  //  HEADER
+  Widget _buildHeaderCard(BuildContext context, dynamic res) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -84,8 +101,8 @@ class ViewDetailsPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Soil Analysis",
+          Text(
+            AppLocalizations.of(context)!.soilAnalysis,
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
@@ -94,7 +111,7 @@ class ViewDetailsPage extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            res?.level ?? "Unknown Level",
+            res?.level ?? AppLocalizations.of(context)!.unknownLevel,
             style: const TextStyle(color: Colors.white70),
           ),
         ],
@@ -102,7 +119,7 @@ class ViewDetailsPage extends StatelessWidget {
     );
   }
 
-  // 🧾 SECTION TITLE
+  //  SECTION TITLE
   Widget _sectionTitle(String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
@@ -113,7 +130,7 @@ class ViewDetailsPage extends StatelessWidget {
     );
   }
 
-  // 📦 GRID INPUT
+  //  GRID INPUT
   Widget _buildGrid(List<Widget> items) {
     return Wrap(spacing: 10, runSpacing: 10, children: items);
   }
@@ -137,8 +154,8 @@ class ViewDetailsPage extends StatelessWidget {
     );
   }
 
-  // 📊 INFO CARD
-  Widget _buildInfoCard(String title, String? value) {
+  //  INFO CARD
+  Widget _buildInfoCard(BuildContext context, String title, String? value) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
@@ -151,7 +168,7 @@ class ViewDetailsPage extends StatelessWidget {
         children: [
           Text(title),
           Text(
-            value ?? "N/A",
+            value ?? AppLocalizations.of(context)!.notAvailable,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ],
@@ -159,8 +176,8 @@ class ViewDetailsPage extends StatelessWidget {
     );
   }
 
-  // 🌾 CROPS CARD
-  Widget _buildCropCard(CropRecommendations crop) {
+  //  CROPS CARD
+  Widget _buildCropCard(BuildContext context, CropRecommendations crop) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(14),
@@ -179,7 +196,7 @@ class ViewDetailsPage extends StatelessWidget {
 
               Expanded(
                 child: Text(
-                  crop.cropEn ?? "Unknown Crop",
+                  crop.cropEn ?? AppLocalizations.of(context)!.unknownCrop,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -204,7 +221,7 @@ class ViewDetailsPage extends StatelessWidget {
           const SizedBox(height: 6),
 
           Text(
-            "Season: ${crop.seasonEn ?? "N/A"}",
+            "${AppLocalizations.of(context)!.seasonLabel}: ${crop.seasonEn ?? AppLocalizations.of(context)!.notAvailable}",
             style: const TextStyle(color: Colors.grey),
           ),
 

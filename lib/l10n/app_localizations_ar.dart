@@ -193,10 +193,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get soilColor => 'لون التربة';
 
   @override
-  String get nameEn => 'الاسم بالإنجليزية';
+  String get nameEn => 'اسم التربة';
 
   @override
   String get recommendedCrops => 'المحاصيل الموصى بها';
+
+  @override
+  String get soilAnalysisResult => 'نتيجه تحليل التربة';
 
   @override
   String get soilClassification => 'تصنيف التربة';
@@ -278,11 +281,89 @@ class AppLocalizationsAr extends AppLocalizations {
   String get choseLanguage => 'اختار اللغة';
 
   @override
-  String get aboutApp => 'اصدار التطبيق';
+  String get aboutApp => 'حول التطبيق';
 
   @override
   String get version => 'الاصدار 1.0.0';
 
   @override
   String get languages => 'اللغات';
+
+  @override
+  String get unknownSoil => 'نوع تربة غير معروف';
+
+  @override
+  String get noReportAvailable => 'لا يوجد تقرير متاح';
+
+  @override
+  String get showLess => 'إخفاء';
+
+  @override
+  String get noHistoryYet => 'لا يوجد سجل بعد 🌱';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get unknown => 'غير معروف';
+
+  @override
+  String get unknownUser => 'مستخدم غير معرروف';
+
+  @override
+  String get notAvailable => 'غير متاح';
+
+  @override
+  String get phone => 'رقم الهاتف';
+
+  @override
+  String get date => 'التاريخ';
+
+  @override
+  String get crop => 'المحصول';
+
+  @override
+  String get level => 'المستوى';
+
+  @override
+  String get loading => 'جاري التحميل...';
+
+  @override
+  String get error => 'حدث خطأ';
+
+  @override
+  String get success => 'تم بنجاح';
+
+  @override
+  String get save => 'حفظ';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get soilAnalysisDetails => 'تفاصيل التحليل';
+
+  @override
+  String get unknownLevel => 'مستوى غير معروف';
+
+  @override
+  String get noCropRecommendations => 'لا توجد توصيات محاصيل';
+
+  @override
+  String get unknownCrop => 'محصول غير معروف';
+
+  @override
+  String get seasonLabel => 'الموسم';
+
+  @override
+  String get cropRecommendations => 'توصيات المحاصيل';
+
+  @override
+  String get noRecommendationsAvailable => 'لا توجد توصيات متاحة 🌾';
+
+  @override
+  String get unknownSeason => 'موسم غير معروف';
 }
