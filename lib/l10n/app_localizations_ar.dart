@@ -267,4 +267,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterValidNumber => 'أدخل رقمًا صحيحًا';
+
+  @override
+  String get settings => 'الاعدادات';
+
+  @override
+  String get changeAppLanguage => 'تغيير لغة التطبيق';
+
+  @override
+  String get choseLanguage => 'اختار اللغة';
+
+  @override
+  String get aboutApp => 'اصدار التطبيق';
+
+  @override
+  String get version => 'الاصدار 1.0.0';
+
+  @override
+  String get languages => 'اللغات';
 }

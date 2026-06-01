@@ -268,4 +268,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterValidNumber => 'Enter a valid number';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get changeAppLanguage => 'Change App Language';
+
+  @override
+  String get choseLanguage => 'Chose Language';
+
+  @override
+  String get aboutApp => 'About App';
+
+  @override
+  String get version => 'Version 1.0.0';
+
+  @override
+  String get languages => 'Languages';
 }

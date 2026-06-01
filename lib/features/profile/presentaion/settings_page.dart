@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gharsa_app/features/cubit/locale_cubit.dart';
-
+import 'package:gharsa_app/l10n/app_localizations.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -18,8 +18,8 @@ class SettingsPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                "Choose Language",
+              Text(
+                AppLocalizations.of(context)!.choseLanguage,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
@@ -57,7 +57,7 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: Text(AppLocalizations.of(context)!.settings),
         centerTitle: true,
         elevation: 0,
       ),
@@ -81,9 +81,9 @@ class SettingsPage extends StatelessWidget {
                 ],
               ),
               child: ListTile(
-                leading: const Icon(Icons.language, color: Colors.green),
-                title: const Text("Language"),
-                subtitle: const Text("Change app language"),
+                leading:  Icon(Icons.language, color: Colors.green),
+                title:  Text(AppLocalizations.of(context)!.languages),
+                subtitle:  Text(AppLocalizations.of(context)!.changeAppLanguage),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () => _showLanguageDialog(context),
               ),
@@ -97,10 +97,10 @@ class SettingsPage extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: const ListTile(
+              child: ListTile(
                 leading: Icon(Icons.info_outline),
-                title: Text("About App"),
-                subtitle: Text("Version 1.0.0"),
+                title: Text(AppLocalizations.of(context)!.aboutApp),
+                subtitle: Text(AppLocalizations.of(context)!.version),
               ),
             ),
           ],

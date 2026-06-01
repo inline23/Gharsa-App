@@ -150,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  // ❌ ERROR UI
+  //  ERROR UI
   Widget _errorView(String message) {
     return Center(
       child: Column(
@@ -171,7 +171,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  // 📦 INFO CARD (clean)
+  //  INFO CARD (clean)
   Widget _infoCard(IconData icon, String title, String value) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),

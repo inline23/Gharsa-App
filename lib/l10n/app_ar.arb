@@ -94,5 +94,12 @@
   "riceSupport": "مستويات عالية من البوتاسيوم ودرجة حموضة (pH) مناسبة تدعم نمو الأرز",
   "analyzingSoil": "جاري تحليل التربة...",
   "requiredField": "هذا الحقل مطلوب",
-  "enterValidNumber": "أدخل رقمًا صحيحًا"
+  "enterValidNumber": "أدخل رقمًا صحيحًا",
+  "settings": "الاعدادات",
+  "choseLanguage": "اختار اللغة",
+  "changeAppLanguage" : "تغيير لغة التطبيق",
+  "aboutApp": "اصدار التطبيق",
+  "version": "الاصدار 1.0.0",
+  "languages" : "اللغات"
+
 }

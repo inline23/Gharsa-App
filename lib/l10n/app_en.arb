@@ -94,6 +94,12 @@
   "riceSupport": "High potassium levels and suitable pH support rice growth",
   "analyzingSoil": "Analyzing soil...",
   "requiredField": "This field is required",
-  "enterValidNumber": "Enter a valid number"
+  "enterValidNumber": "Enter a valid number",
+  "settings": "Settings",
+  "changeAppLanguage" : "Change App Language",
+  "choseLanguage" : "Chose Language",
+  "aboutApp" : "About App",
+  "version" : "Version 1.0.0",
+  "languages" : "Languages"
 
 }
