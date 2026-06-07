@@ -50,22 +50,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 80),
-
                   //------------------------------ Logo
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.eco, color: AppColors.primaryGreen, size: 36),
-                      SizedBox(width: 8),
-                      Text(
-                        'Gharsa',
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primaryGreen,
-                          fontFamily: 'Inter',
-                        ),
-                      ),
+                    children: [
+                      Image.asset('assets/images/gharsa.png', width: 150),
                     ],
                   ),
 

@@ -367,4 +367,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unknownSeason => 'Unknown Season';
+
+  @override
+  String get noData => 'No data';
+
+  @override
+  String get firstAnalysis => 'Lets do the first Analysis';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get expertReport => 'Expert Report';
+
+  @override
+  String get soilType => 'Soil Type';
 }

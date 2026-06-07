@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gharsa_app/features/soil%20anaylsis/presentation/cubit/soil_analysis_cubit.dart';
 import 'package:gharsa_app/features/soil%20anaylsis/presentation/soil_analysis_result_screen.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/custom_text_field.dart';
 import 'package:gharsa_app/l10n/app_localizations.dart';
-
 
 class SoilAnalysisForm extends StatefulWidget {
   const SoilAnalysisForm({super.key});
@@ -35,37 +35,36 @@ class _SoilAnalysisFormState extends State<SoilAnalysisForm> {
   final TextEditingController eDepth = TextEditingController();
   final TextEditingController ph = TextEditingController();
 
+  String getTextureName(BuildContext context, String texture) {
+    final l10n = AppLocalizations.of(context)!;
 
-String getTextureName(BuildContext context, String texture) {
-  final l10n = AppLocalizations.of(context)!;
-
-  switch (texture) {
-    case 'Clay':
-      return l10n.clay;
-    case 'Clay Loam':
-      return l10n.clayLoam;
-    case 'Loam':
-      return l10n.loam;
-    case 'Loamy Sand':
-      return l10n.loamySand;
-    case 'Sand':
-      return l10n.sand;
-    case 'Sandy Clay':
-      return l10n.sandyClay;
-    case 'Sandy Clay Loam':
-      return l10n.sandyClayLoam;
-    case 'Sandy Loam':
-      return l10n.sandyLoam;
-    case 'Silty Clay':
-      return l10n.siltyClay;
-    case 'Silty Clay Loam':
-      return l10n.siltyClayLoam;
-    case 'Silty Loam':
-      return l10n.siltyLoam;
-    default:
-      return texture;
+    switch (texture) {
+      case 'Clay':
+        return l10n.clay;
+      case 'Clay Loam':
+        return l10n.clayLoam;
+      case 'Loam':
+        return l10n.loam;
+      case 'Loamy Sand':
+        return l10n.loamySand;
+      case 'Sand':
+        return l10n.sand;
+      case 'Sandy Clay':
+        return l10n.sandyClay;
+      case 'Sandy Clay Loam':
+        return l10n.sandyClayLoam;
+      case 'Sandy Loam':
+        return l10n.sandyLoam;
+      case 'Silty Clay':
+        return l10n.siltyClay;
+      case 'Silty Clay Loam':
+        return l10n.siltyClayLoam;
+      case 'Silty Loam':
+        return l10n.siltyLoam;
+      default:
+        return texture;
+    }
   }
-}
 
   String? selectedTexture;
 
@@ -130,6 +129,11 @@ String getTextureName(BuildContext context, String texture) {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: AppColors.primaryGreen,
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.dark,
+            ),
             backgroundColor: Colors.transparent,
             elevation: 0,
             iconTheme: const IconThemeData(color: Colors.black87),
@@ -160,9 +164,11 @@ String getTextureName(BuildContext context, String texture) {
                     const SizedBox(height: 24),
 
                     /// ================= SECTION 1 =================
-                    _buildSectionTitle(AppLocalizations.of(context)!.soilChemistry),
+                    _buildSectionTitle(
+                      AppLocalizations.of(context)!.soilChemistry,
+                    ),
                     _card([
-                     _field(AppLocalizations.of(context)!.ec, ec),
+                      _field(AppLocalizations.of(context)!.ec, ec),
                       _field(AppLocalizations.of(context)!.sar, sar),
                       _field(AppLocalizations.of(context)!.caco3, caco3),
                       _field(AppLocalizations.of(context)!.gypsum, gypsum),
@@ -170,7 +176,9 @@ String getTextureName(BuildContext context, String texture) {
                     ]),
 
                     /// ================= SECTION 2 =================
-                    _buildSectionTitle(AppLocalizations.of(context)!.macroNutrients),
+                    _buildSectionTitle(
+                      AppLocalizations.of(context)!.macroNutrients,
+                    ),
                     _card([
                       _field(AppLocalizations.of(context)!.nitrogen, n),
                       _field(AppLocalizations.of(context)!.phosphorus, p),
@@ -178,7 +186,9 @@ String getTextureName(BuildContext context, String texture) {
                     ]),
 
                     /// ================= SECTION 3 =================
-                    _buildSectionTitle(AppLocalizations.of(context)!.microNutrients),
+                    _buildSectionTitle(
+                      AppLocalizations.of(context)!.microNutrients,
+                    ),
                     _card([
                       _field(AppLocalizations.of(context)!.iron, fe),
                       _field(AppLocalizations.of(context)!.manganese, mn),
@@ -187,16 +197,23 @@ String getTextureName(BuildContext context, String texture) {
                     ]),
 
                     /// ================= SECTION 4 =================
-                    _buildSectionTitle(AppLocalizations.of(context)!.physicalProperties),
+                    _buildSectionTitle(
+                      AppLocalizations.of(context)!.physicalProperties,
+                    ),
                     _card([
-                      _field(AppLocalizations.of(context)!.effectiveDepth, eDepth),
+                      _field(
+                        AppLocalizations.of(context)!.effectiveDepth,
+                        eDepth,
+                      ),
                       _field(AppLocalizations.of(context)!.ph, ph),
                     ]),
 
                     const SizedBox(height: 16),
 
                     /// ================= TEXTURE =================
-                    _buildSectionTitle(AppLocalizations.of(context)!.soilTexture),
+                    _buildSectionTitle(
+                      AppLocalizations.of(context)!.soilTexture,
+                    ),
 
                     const SizedBox(height: 10),
 
@@ -277,7 +294,7 @@ String getTextureName(BuildContext context, String texture) {
                             texture: selectedTexture ?? "",
                           );
                         },
-                        child:  Text(
+                        child: Text(
                           AppLocalizations.of(context)!.analyzeSoil,
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),

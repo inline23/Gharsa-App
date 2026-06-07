@@ -63,7 +63,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   ? Icon(widget.prefixIcon, color: const Color(0xFF757575))
                   : null,
 
-              // 👇 زرار العين الحقيقي
+              // Eye icon for password fields
               suffixIcon: widget.isPassword
                   ? IconButton(
                       icon: Icon(

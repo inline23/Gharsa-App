@@ -805,6 +805,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown Season'**
   String get unknownSeason;
+
+  /// No description provided for @noData.
+  ///
+  /// In en, this message translates to:
+  /// **'No data'**
+  String get noData;
+
+  /// No description provided for @firstAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Lets do the first Analysis'**
+  String get firstAnalysis;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @expertReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Expert Report'**
+  String get expertReport;
+
+  /// No description provided for @soilType.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil Type'**
+  String get soilType;
 }
 
 class _AppLocalizationsDelegate

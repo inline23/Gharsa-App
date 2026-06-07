@@ -366,4 +366,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unknownSeason => 'موسم غير معروف';
+
+  @override
+  String get noData => 'لا يوجد بيانات';
+
+  @override
+  String get firstAnalysis => 'لنقم باجراء اول تحليل';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get expertReport => 'تقرير الخبير';
+
+  @override
+  String get soilType => 'نوع التربة';
 }

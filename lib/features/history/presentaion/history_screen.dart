@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gharsa_app/features/history/data/models/history_model.dart';
 import 'package:gharsa_app/features/history/presentaion/cubit/history_cubit.dart';
@@ -27,6 +28,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
       backgroundColor: const Color(0xFFF7F8FA),
 
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: AppColors.primaryGreen,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+        ),
         title: Text(
           AppLocalizations.of(context)!.history,
           style: TextStyle(

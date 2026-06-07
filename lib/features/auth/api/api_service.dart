@@ -269,7 +269,7 @@ class ApiService {
         final json = jsonDecode(response.body);
         return SoilAnalysisModel.fromJson(json);
       } else if (response.statusCode == 401) {
-        print("Unauthorized ❌ → لازم Login تاني");
+        print("Unauthorized  →need to login again");
         return null;
       } else {
         print(response.body);

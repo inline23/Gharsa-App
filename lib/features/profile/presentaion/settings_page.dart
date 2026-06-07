@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gharsa_app/core/theme/app_colors.dart';
 import 'package:gharsa_app/features/cubit/locale_cubit.dart';
 import 'package:gharsa_app/l10n/app_localizations.dart';
 
@@ -57,6 +59,11 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: AppColors.primaryGreen,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+        ),
         title: Text(AppLocalizations.of(context)!.settings),
         centerTitle: true,
         elevation: 0,
@@ -81,7 +88,7 @@ class SettingsPage extends StatelessWidget {
                 ],
               ),
               child: ListTile(
-                leading: Icon(Icons.language, color: Colors.green),
+                leading: Icon(Icons.language, color: AppColors.primaryGreen),
                 title: Text(AppLocalizations.of(context)!.languages),
                 subtitle: Text(AppLocalizations.of(context)!.changeAppLanguage),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
@@ -129,7 +136,7 @@ class _LanguageTile extends StatelessWidget {
       elevation: 0,
       color: const Color(0xFFF3F5F7),
       child: ListTile(
-        leading: Icon(icon, color: Colors.green),
+        leading: Icon(icon, color: AppColors.primaryGreen),
         title: Text(title),
         subtitle: Text(subtitle),
         onTap: onTap,

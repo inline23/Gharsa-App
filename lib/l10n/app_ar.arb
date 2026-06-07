@@ -138,6 +138,11 @@
   "noRecommendationsAvailable": "لا توجد توصيات متاحة 🌾",
   "seasonLabel": "الموسم",
   "unknownCrop": "محصول غير معروف",
-  "unknownSeason": "موسم غير معروف"
+  "unknownSeason": "موسم غير معروف",
+  "noData": "لا يوجد بيانات",
+  "firstAnalysis" : "لنقم باجراء اول تحليل",
+  "today" : "اليوم",
+  "expertReport": "تقرير الخبير",
+  "soilType": "نوع التربة"
 
 }

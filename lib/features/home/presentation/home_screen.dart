@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gharsa_app/core/routes/app_routes.dart';
 import 'package:gharsa_app/features/history/data/models/history_model.dart';
@@ -15,7 +16,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appName, style: Theme.of(context).textTheme.displayLarge),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: AppColors.primaryGreen,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+        ),
+        title: Text(
+          AppLocalizations.of(context)!.appName,
+          style: Theme.of(context).textTheme.displayLarge,
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -24,9 +33,9 @@ class HomeScreen extends StatelessWidget {
           children: [
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                padding: const EdgeInsets.symmetric(horizontal: 70.0),
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/gharsa.png',
                   width: double.infinity,
                 ),
               ),
@@ -56,7 +65,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // 📌 HEADER (NOW DYNAMIC)
+  //  HEADER (NOW DYNAMIC)
   Widget _header() {
     return BlocBuilder<HistoryCubit, HistoryState>(
       builder: (context, state) {
@@ -70,11 +79,13 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-               AppLocalizations.of(context)!.latestAnalysis,
+              AppLocalizations.of(context)!.latestAnalysis,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Text(
-              item != null ? _formatDate(item.createdAt ?? "") : "No data",
+              item != null
+                  ? _formatDate(context, item.createdAt ?? "")
+                  : AppLocalizations.of(context)!.noData,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
@@ -83,10 +94,11 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // 🌱 LAST ANALYSIS
+  //  LAST ANALYSIS
   Widget _lastAnalysisSection(BuildContext context) {
     return BlocBuilder<HistoryCubit, HistoryState>(
       builder: (context, state) {
+        final isArabic = Localizations.localeOf(context).languageCode == 'ar';
         HistoryItem? item;
 
         if (state is HistorySuccess && state.history.isNotEmpty) {
@@ -94,7 +106,7 @@ class HomeScreen extends StatelessWidget {
         }
 
         if (item == null) {
-          return _emptyCard();
+          return _emptyCard(context);
         }
 
         final res = item.responsePayload;
@@ -124,7 +136,7 @@ class HomeScreen extends StatelessWidget {
                       color: AppColors.primaryGreen.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
                     ), //     -----------------------------------------------
-                    child: Icon(weight: 36, Icons.baby_changing_station),
+                    child: Image.asset('assets/images/testing.png', width: 40),
                   ),
                   const SizedBox(width: 12),
 
@@ -133,12 +145,12 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                         AppLocalizations.of(context)!.soilAnalysis,
+                          AppLocalizations.of(context)!.soilAnalysis,
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          res?.level ?? "Unknown",
+                          res?.level ?? AppLocalizations.of(context)!.unknown,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
@@ -163,7 +175,9 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        c.cropEn ?? "",
+                        isArabic
+                            ? (c.cropAr ?? c.cropEn ?? '')
+                            : (c.cropEn ?? c.cropAr ?? ''),
                         style: const TextStyle(
                           fontSize: 11,
                           color: Colors.green,
@@ -196,14 +210,14 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _emptyCard() {
+  Widget _emptyCard(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
       ),
-      child: const Text("No analysis yet 🌱"),
+      child: Text(AppLocalizations.of(context)!.firstAnalysis),
     );
   }
 
@@ -262,7 +276,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   //  DATE FORMATTER
-  String _formatDate(String date) {
+  String _formatDate(BuildContext context, String date) {
     try {
       final parsed = DateTime.parse(date);
       final now = DateTime.now();
@@ -270,7 +284,7 @@ class HomeScreen extends StatelessWidget {
       if (parsed.day == now.day &&
           parsed.month == now.month &&
           parsed.year == now.year) {
-        return "Today";
+        return AppLocalizations.of(context)!.today;
       }
 
       return "${parsed.day}/${parsed.month}";

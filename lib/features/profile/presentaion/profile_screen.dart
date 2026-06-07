@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gharsa_app/features/profile/presentaion/cubit/profile_cubit.dart';
 import 'package:gharsa_app/features/profile/presentaion/cubit/profile_state.dart';
 import 'package:gharsa_app/features/profile/presentaion/settings_page.dart';
+import 'package:gharsa_app/features/profile/presentaion/update_profile_screen.dart';
 import 'package:gharsa_app/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 
@@ -33,6 +35,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: const Color(0xFFF7F8FA),
 
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: AppColors.primaryGreen,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -44,9 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             icon: const Icon(Icons.settings),
           ),
         ],
-       title: Text(
-  AppLocalizations.of(context)!.profile,
-),
+        title: Text(AppLocalizations.of(context)!.profile),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -77,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     const SizedBox(height: 10),
 
-                    // 👤 AVATAR (better UI)
+                    //  AVATAR (better UI)
                     Container(
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
@@ -91,7 +96,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         radius: 55,
                         backgroundImage:
                             (user.avatar != null && user.avatar!.isNotEmpty)
-                            ? NetworkImage(user.avatar!)
+                            ? NetworkImage(
+                                "https://gharsa.semiona.com/storage/${user.avatar}",
+                              )
                             : null,
                         child: (user.avatar == null || user.avatar!.isEmpty)
                             ? const Icon(Icons.person, size: 50)
@@ -102,8 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 15),
 
                     Text(
-                   user.name ??
-    AppLocalizations.of(context)!.unknownUser,
+                      user.name ?? AppLocalizations.of(context)!.unknownUser,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -119,12 +125,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     const SizedBox(height: 25),
 
-                    _infoCard(Icons.phone, AppLocalizations.of(context)!.phone, user.phoneNumber ?? AppLocalizations.of(context)!.notAvailable),
-                    _infoCard(Icons.location_city, AppLocalizations.of(context)!.city, user.city ?? AppLocalizations.of(context)!.notAvailable),
+                    _infoCard(
+                      Icons.phone,
+                      AppLocalizations.of(context)!.phone,
+                      user.phoneNumber ??
+                          AppLocalizations.of(context)!.notAvailable,
+                    ),
+                    _infoCard(
+                      Icons.location_city,
+                      AppLocalizations.of(context)!.city,
+                      user.city?.nameAr ??
+                          AppLocalizations.of(context)!.notAvailable,
+                    ),
                     _infoCard(
                       Icons.verified,
                       AppLocalizations.of(context)!.verified,
-                      user.isVerified == true ? AppLocalizations.of(context)!.yes : AppLocalizations.of(context)!.no,
+                      user.isVerified == true
+                          ? AppLocalizations.of(context)!.yes
+                          : AppLocalizations.of(context)!.no,
                     ),
                     _infoCard(
                       Icons.calendar_today,
@@ -137,7 +155,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => UpdateProfileScreen(),
+                            ),
+                          );
+                        },
                         icon: const Icon(Icons.edit),
                         label: Text(AppLocalizations.of(context)!.editProfile),
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gharsa_app/features/auth/data/repository/auth_repo.dart';
 import 'package:gharsa_app/features/auth/presentation/cubit/auth_cubit.dart';
@@ -19,6 +20,14 @@ import 'package:gharsa_app/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Color.fromARGB(255, 54, 101, 56),
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
   runApp(
     MultiBlocProvider(
       providers: [

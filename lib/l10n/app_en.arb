@@ -137,6 +137,11 @@
   "noRecommendationsAvailable": "No recommendations available 🌾",
   "seasonLabel": "Season",
   "unknownCrop": "Unknown Crop",
-  "unknownSeason": "Unknown Season"
+  "unknownSeason": "Unknown Season",
+  "noData" : "No data",
+  "firstAnalysis" : "Lets do the first Analysis",
+  "today" : "Today",
+  "expertReport": "Expert Report",
+  "soilType": "Soil Type"
 
 }

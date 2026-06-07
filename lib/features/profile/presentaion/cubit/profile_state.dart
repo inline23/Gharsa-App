@@ -12,6 +12,14 @@ class ProfileSuccess extends ProfileState {
   ProfileSuccess(this.user);
 }
 
+class ProfileUpdating extends ProfileState {}
+
+class ProfileUpdated extends ProfileState {
+  final UserData user;
+
+  ProfileUpdated(this.user);
+}
+
 class ProfileError extends ProfileState {
   final String message;
 

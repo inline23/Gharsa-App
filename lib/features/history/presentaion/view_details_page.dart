@@ -13,6 +13,11 @@ class ViewDetailsPage extends StatelessWidget {
     final req = history.requestPayload;
     final res = history.responsePayload;
     final crops = res?.cropRecommendations ?? [];
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+
+    final expertReport = isArabic
+        ? (res?.expertReportAr ?? '')
+        : (res?.expertReportEn ?? '');
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7F8FA),
@@ -64,14 +69,31 @@ class ViewDetailsPage extends StatelessWidget {
             AppLocalizations.of(context)!.soilColor,
             res?.color,
           ),
-
           _buildInfoCard(
             context,
-            AppLocalizations.of(context)!.nameEn,
-            res?.nameEn,
+            AppLocalizations.of(context)!.soilType,
+            isArabic ? res?.nameAr : res?.nameEn,
           ),
 
           const SizedBox(height: 20),
+          if (expertReport.isNotEmpty) ...[
+            _sectionTitle(AppLocalizations.of(context)!.expertReport),
+
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Text(
+                expertReport,
+                style: const TextStyle(fontSize: 14, height: 1.6),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+          ],
 
           //  CROPS SECTION
           _sectionTitle(AppLocalizations.of(context)!.recommendedCrops),
@@ -101,17 +123,23 @@ class ViewDetailsPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Icon(Icons.eco, color: Colors.white, size: 40),
+
+          const SizedBox(height: 16),
+
           Text(
-            AppLocalizations.of(context)!.soilAnalysis,
-            style: TextStyle(
+            res?.level ?? AppLocalizations.of(context)!.unknownLevel,
+            style: const TextStyle(
               color: Colors.white,
-              fontSize: 18,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
+
           const SizedBox(height: 6),
+
           Text(
-            res?.level ?? AppLocalizations.of(context)!.unknownLevel,
+            AppLocalizations.of(context)!.soilAnalysis,
             style: const TextStyle(color: Colors.white70),
           ),
         ],
@@ -178,6 +206,21 @@ class ViewDetailsPage extends StatelessWidget {
 
   //  CROPS CARD
   Widget _buildCropCard(BuildContext context, CropRecommendations crop) {
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+
+    final cropName = isArabic
+        ? (crop.cropAr ?? crop.cropEn ?? '')
+        : (crop.cropEn ?? crop.cropAr ?? '');
+
+    final season = isArabic
+        ? (crop.seasonAr ?? crop.seasonEn ?? '')
+        : (crop.seasonEn ?? crop.seasonAr ?? '');
+
+    final reason = isArabic
+        ? (crop.reasonAr ?? crop.reasonEn ?? '')
+        : (crop.reasonEn ?? crop.reasonAr ?? '');
+
+    final suitability = crop.suitability ?? 0;
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(14),
@@ -196,8 +239,13 @@ class ViewDetailsPage extends StatelessWidget {
 
               Expanded(
                 child: Text(
-                  crop.cropEn ?? AppLocalizations.of(context)!.unknownCrop,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  cropName.isEmpty
+                      ? AppLocalizations.of(context)!.unknownCrop
+                      : cropName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
               ),
 
@@ -211,23 +259,33 @@ class ViewDetailsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  "${crop.suitability ?? 0}",
+                  "$suitability%",
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ],
           ),
+          const SizedBox(height: 12),
+
+          LinearProgressIndicator(
+            value: suitability / 100,
+            minHeight: 8,
+            borderRadius: BorderRadius.circular(20),
+          ),
+
+          const SizedBox(height: 10),
 
           const SizedBox(height: 6),
 
           Text(
-            "${AppLocalizations.of(context)!.seasonLabel}: ${crop.seasonEn ?? AppLocalizations.of(context)!.notAvailable}",
+            "${AppLocalizations.of(context)!.seasonLabel}: "
+            "${season.isEmpty ? AppLocalizations.of(context)!.notAvailable : season}",
             style: const TextStyle(color: Colors.grey),
           ),
 
           const SizedBox(height: 6),
 
-          Text(crop.reasonEn ?? "", style: const TextStyle(fontSize: 13)),
+          Text(reason, style: const TextStyle(fontSize: 14, height: 1.5)),
         ],
       ),
     );

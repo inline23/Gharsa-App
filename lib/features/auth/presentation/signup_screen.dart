@@ -64,6 +64,14 @@ class _SignupScreenState extends State<SignupScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/gharsa.png', width: 150),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20),
 
                   const Text(
                     'Create an account',

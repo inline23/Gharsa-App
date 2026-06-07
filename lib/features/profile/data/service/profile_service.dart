@@ -21,4 +21,44 @@ class ProfileService {
       throw Exception('Failed to load profile');
     }
   }
+
+  Future<UserProfileModel> updateProfile({
+    String? name,
+    String? phoneNumber,
+    int? cityId,
+    String? imagePath,
+  }) async {
+    final headers = await apiService.getHeaders();
+
+    final request = http.MultipartRequest(
+      'POST',
+      Uri.parse('https://gharsa.semiona.com/api/user/profile'),
+    );
+
+    request.headers.addAll(headers);
+
+    if (name != null && name.trim().isNotEmpty) {
+      request.fields['name'] = name;
+    }
+
+    if (phoneNumber != null && phoneNumber.trim().isNotEmpty) {
+      request.fields['phone_number'] = phoneNumber;
+    }
+
+    if (cityId != null) {
+      request.fields['city_id'] = cityId.toString();
+    }
+
+    if (imagePath != null) {
+      request.files.add(await http.MultipartFile.fromPath('avatar', imagePath));
+    }
+
+    final response = await http.Response.fromStream(await request.send());
+
+    if (response.statusCode == 200) {
+      return UserProfileModel.fromJson(jsonDecode(response.body));
+    }
+
+    throw Exception("Update failed");
+  }
 }
