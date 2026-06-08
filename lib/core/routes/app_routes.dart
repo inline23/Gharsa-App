@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:gharsa_app/features/auth/presentation/forgot_password_screen.dart';
 import 'package:gharsa_app/features/profile/presentaion/profile_screen.dart';
 import 'package:gharsa_app/features/soil%20anaylsis/presentation/soil_analysis_form.dart';
+import 'package:gharsa_app/features/onboarding/presentation/splash_screen.dart';
+import 'package:gharsa_app/features/onboarding/presentation/onboarding_screen.dart';
 
 import '../../features/main/main_screen.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/auth/presentation/signup_screen.dart';
 
 class AppRoutes {
+  static const String splash = '/';
+  static const String onboarding = '/onboarding';
+  static const String login = '/login';
   static const String home = '/home';
-  static const String login = '/';
   static const String signup = '/signup';
   static const String profile = '/profile';
   static const String history = '/history';
@@ -19,6 +23,10 @@ class AppRoutes {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case splash:
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
+      case onboarding:
+        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case home:
         return MaterialPageRoute(builder: (_) => const MainScreen());
       case login:

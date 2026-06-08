@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
 
       title: 'Gharsa',
       theme: AppTheme.lightTheme,
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.splash,
       onGenerateRoute: AppRoutes.generateRoute,
       debugShowCheckedModeBanner: false,
     );

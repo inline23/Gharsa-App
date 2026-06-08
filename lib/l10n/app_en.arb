@@ -142,6 +142,19 @@
   "firstAnalysis" : "Lets do the first Analysis",
   "today" : "Today",
   "expertReport": "Expert Report",
-  "soilType": "Soil Type"
-
+  "soilType": "Soil Type",
+  "onboardingTitle1": "Smart Soil Analysis",
+  "onboardingDesc1": "Analyze your soil's chemical and physical properties using modern AI technologies to optimize crop quality.",
+  "onboardingTitle2": "Suitable Crop Recommendations",
+  "onboardingDesc2": "Get precise recommendations for the best crops for your soil and season to maximize productivity.",
+  "onboardingTitle3": "Smart Agricultural Assistant",
+  "onboardingDesc3": "Chat with our AI-powered agricultural expert to get instant solutions and advice at any time.",
+  "skip": "Skip",
+  "next": "Next",
+  "getStarted": "Get Started",
+  "saveChanges": "Save Changes",
+  "profileUpdated": "Profile updated successfully",
+  "selectCity": "Select City",
+  "cairo": "Cairo",
+  "giza": "Giza"
 }

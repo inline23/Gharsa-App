@@ -382,4 +382,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get soilType => 'Soil Type';
+
+  @override
+  String get onboardingTitle1 => 'Smart Soil Analysis';
+
+  @override
+  String get onboardingDesc1 =>
+      'Analyze your soil\'s chemical and physical properties using modern AI technologies to optimize crop quality.';
+
+  @override
+  String get onboardingTitle2 => 'Suitable Crop Recommendations';
+
+  @override
+  String get onboardingDesc2 =>
+      'Get precise recommendations for the best crops for your soil and season to maximize productivity.';
+
+  @override
+  String get onboardingTitle3 => 'Smart Agricultural Assistant';
+
+  @override
+  String get onboardingDesc3 =>
+      'Chat with our AI-powered agricultural expert to get instant solutions and advice at any time.';
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get profileUpdated => 'Profile updated successfully';
+
+  @override
+  String get selectCity => 'Select City';
+
+  @override
+  String get cairo => 'Cairo';
+
+  @override
+  String get giza => 'Giza';
 }

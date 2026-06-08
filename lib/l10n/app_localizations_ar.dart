@@ -381,4 +381,49 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get soilType => 'نوع التربة';
+
+  @override
+  String get onboardingTitle1 => 'تحليل ذكي للتربة';
+
+  @override
+  String get onboardingDesc1 =>
+      'حلل خصائص تربتك الكيميائية والفيزيائية باستخدام تقنيات الذكاء الاصطناعي الحديثة لتحسين جودة محاصيلك.';
+
+  @override
+  String get onboardingTitle2 => 'توصيات المحاصيل المناسبة';
+
+  @override
+  String get onboardingDesc2 =>
+      'احصل على ترشيحات دقيقة لأفضل المحاصيل الزراعية لتربتك والموسم المناسب لزيادة إنتاجيتك.';
+
+  @override
+  String get onboardingTitle3 => 'مساعدك الزراعي الذكي';
+
+  @override
+  String get onboardingDesc3 =>
+      'تواصل مع خبيرنا المدعوم بالذكاء الاصطناعي للإجابة على جميع استفساراتك الزراعية فوراً وعلى مدار الساعة.';
+
+  @override
+  String get skip => 'تخطي';
+
+  @override
+  String get next => 'التالي';
+
+  @override
+  String get getStarted => 'ابدأ الآن';
+
+  @override
+  String get saveChanges => 'حفظ التغييرات';
+
+  @override
+  String get profileUpdated => 'تم تحديث الملف الشخصي بنجاح';
+
+  @override
+  String get selectCity => 'اختر المدينة';
+
+  @override
+  String get cairo => 'القاهرة';
+
+  @override
+  String get giza => 'الجيزة';
 }
